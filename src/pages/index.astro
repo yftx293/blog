@@ -129,13 +129,11 @@ const latestTalk = talks[0]
       <div class='flex flex-col items-center gap-y-4'>
         <h1 class='text-3xl font-bold' data-jojo-piece='name'>{config.author}</h1>
         <div class='flex flex-wrap justify-center gap-x-7 gap-y-3' data-jojo-piece='labels'>
-          <Label title='Melbourne, Australia'>
-            <Icon name='location' class='size-5' slot='icon' />
-          </Label>
+
           <Label
             title='GitHub'
             as='a'
-            href='https://github.com/joyehuang'
+            href='https://github.com/yftx293'
             target='_blank'
             data-analytics-event='github_link_click'
             data-analytics-surface='home_profile'
@@ -173,67 +171,12 @@ const latestTalk = talks[0]
       <Section title='About' data-jojo-piece='about'>
         <p class='text-muted-foreground'>AI Agent & Full-Stack Developer</p>
         <p class='text-muted-foreground'>
-          墨尔本大学在读，专注 AI Agent 产品开发 —— 从 Adastra Labs（石墨文档海外）的
-          Playyy.ai、特赞 Tezign 的 atypica（商业研究 Multi-Agent），到 fAIshion.ai 与 Goshu Tech
-          的全栈与剪辑 Agent，都是这条线上的实践。 在意 LLM 的底层机制，也在意产品能不能真正跑起来。
-          Build fast, learn faster — 平时弹琴、拉大提琴、玩摄影。
+           在学习和构建 AI Agent、Coding Agent 与 LLM 应用，也在这里记录一些尚未完成的理解。
         </p>
         <Button title='More about me' class='w-fit self-end' href='/about' style='ahead' />
       </Section>
       {/* 导流：另一个产品「面试手记」joyehuang.dev */}
-      <section id='product' aria-labelledby='product-heading' data-jojo-piece='product'>
-        <h2 id='product-heading' class='sr-only'>Product</h2>
-        <a
-          href='https://joyehuang.dev'
-          target='_blank'
-          rel='noopener noreferrer'
-          class='hd interview-card group relative flex flex-col gap-3 p-5 no-underline sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-6'
-          data-hd-frame
-          data-analytics-event='project_link_click'
-          data-analytics-surface='home_interview'
-          data-analytics-section='interview'
-          data-analytics-project='interview-notes'
-          data-analytics-link-type='site'
-        >
-          {/* 手绘墨线边框：路径按卡片实际尺寸生成，进入视口时 draw-on */}
-          <svg class='hd-frame' aria-hidden='true' focusable='false'>
-            <path class='hd-frame-path' pathLength='1' d=''></path>
-          </svg>
 
-          <div class='relative min-w-0'>
-            <div class='flex flex-wrap items-center gap-2 text-xs'>
-              <span class='hd-badge'>新企划 · 即将上线</span>
-              <span class='hd-sub'>joyehuang.dev · 现已开放预约</span>
-            </div>
-            <h3 class='hd-heading mt-2 text-2xl font-bold sm:text-3xl'>
-              <span class='hd-marker'>
-                面试手记
-                <svg
-                  class='hd-marker-svg'
-                  viewBox='0 0 200 18'
-                  preserveAspectRatio='none'
-                  aria-hidden='true'
-                  focusable='false'
-                >
-                  <path
-                    class='hd-marker-path'
-                    pathLength='1'
-                    d='M3 12 C 48 5, 116 16, 197 7'
-                    vector-effect='non-scaling-stroke'></path>
-                </svg>
-              </span>
-            </h3>
-            <p class='hd-body mt-2 text-sm leading-relaxed'>
-              158 道真题一字不删，连答砸的都有 —— 逐字稿回放，看一场面试真实的样子
-            </p>
-          </div>
-
-          <span class='hd-cta relative shrink-0 self-start text-sm sm:self-center'>
-            去看看
-            <span class='hd-arrow' aria-hidden='true'>→</span>
-          </span>
-        </a>
-      </section>
       {
         allPostsByDate.length > 0 && (
           <Section title='Blog'>
