@@ -2,7 +2,7 @@
 /**
  * IntroOverlay — home-page entrance animation.
  *
- * An agent generates "JOYE" by diffusion: a field of noise denoises in
+ * An agent generates "BLOG" by diffusion: a field of noise denoises in
  * discrete steps (a 3-stage pipeline: sample → refine → decode) until the
  * name resolves, then the overlay fades to reveal the real homepage beneath.
  *
@@ -20,6 +20,7 @@
  * the page is only revealed when the visitor chooses to enter.
  */
 import avatar from 'src/assets/avatar.png'
+import config from '@/site-config'
 ---
 
 <div id='intro-overlay' class='intro-overlay' aria-hidden='true'>
@@ -34,9 +35,9 @@ import avatar from 'src/assets/avatar.png'
     </div>
   </div>
   <div class='intro-card' id='intro-card' aria-hidden='true'>
-    <img class='intro-av' id='intro-av' src={avatar.src} alt='Joye' width='112' height='112' />
-    <div class='intro-nm'>Joye</div>
-    <button class='intro-enter' id='intro-enter' type='button'>进入 ~/joye →</button>
+    <img class='intro-av' id='intro-av' src={avatar.src} alt={config.author} width='112' height='112' />
+    <div class='intro-nm'>{config.author}</div>
+    <button class='intro-enter' id='intro-enter' type='button'>进入博客 →</button>
   </div>
   <button id='intro-skip' class='intro-skip' type='button' aria-label='跳过入场动画'>跳过 →</button>
 </div>
@@ -306,7 +307,7 @@ import avatar from 'src/assets/avatar.png'
     addEventListener('mousemove', function (e) { mouse.x = e.clientX * DPR; mouse.y = e.clientY * DPR })
     addEventListener('mouseleave', function () { mouse.x = mouse.y = -1e9 })
 
-    function sampleJOYE() {
+    function sampleBlog() {
       if (!W || !H) return []
       var off = document.createElement('canvas'); off.width = W; off.height = H
       var o = off.getContext('2d')
@@ -314,17 +315,18 @@ import avatar from 'src/assets/avatar.png'
       var tracking = 0.18, size = Math.min(H * 0.4, W * 0.32)
       var setFont = function () { o.font = '700 ' + size + 'px Satoshi, system-ui, sans-serif' }
       setFont()
-      var adv = function () { var w = 0; for (var i = 0; i < 4; i++) w += o.measureText('JOYE'[i]).width + size * tracking; return w - size * tracking }
+      var word = 'BLOG'
+      var adv = function () { var w = 0; for (var i = 0; i < word.length; i++) w += o.measureText(word[i]).width + size * tracking; return w - size * tracking }
       if (adv() > W * 0.72) { size *= W * 0.72 / adv(); setFont() }
       var x = (W - adv()) / 2, y = H * 0.46
-      for (var i = 0; i < 4; i++) { var ch = 'JOYE'[i]; o.fillText(ch, x, y); x += o.measureText(ch).width + size * tracking }
+      for (var i = 0; i < word.length; i++) { var ch = word[i]; o.fillText(ch, x, y); x += o.measureText(ch).width + size * tracking }
       var data = o.getImageData(0, 0, W, H).data, gap = Math.max(5, Math.round(6.5 * DPR)), pts = []
       for (var yy = 0; yy < H; yy += gap) for (var xx = 0; xx < W; xx += gap) if (data[(yy * W + xx) * 4 + 3] > 140) pts.push({ x: xx, y: yy })
       return pts
     }
 
     function build() {
-      var pts = sampleJOYE(), R = Math.min(W, H) * 0.62
+      var pts = sampleBlog(), R = Math.min(W, H) * 0.62
       parts = pts.map(function (p) {
         var ang = Math.random() * 6.283, mag = Math.pow(Math.random(), 0.6) * R
         return {
@@ -396,7 +398,7 @@ import avatar from 'src/assets/avatar.png'
         ctx.drawImage(sprite, rx - s / 2, ry - s / 2, s, s)
       }
 
-      // structure mesh — faint links weave between neighbours as JOYE resolves
+      // structure mesh — faint links weave between neighbours as BLOG resolves
       if (d > 0.5) {
         var R2 = (16 * DPR) * (16 * DPR)
         ctx.strokeStyle = 'rgba(125,211,252,' + (d - 0.5) * 0.42 + ')'; ctx.lineWidth = DPR * 0.5
