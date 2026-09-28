@@ -12,34 +12,6 @@ type SearchApiResult = {
   excerpt: string
 }
 
-const MOCK_AGENT_REPLIES: Record<string, string[]> = {
-  default: [
-    'Hey, this is Joye (well, a tiny mock of him).',
-    'Real agent endpoint is wiring up — for now I just rehearse lines.',
-    'Try `chat what are you building?` or `chat hire you?` for canned answers.'
-  ],
-  building: [
-    'Right now: this terminal, an AI persona for the homepage,',
-    'and a few half-finished blog posts about Astro + RSC + agent UX.'
-  ],
-  hire: [
-    'Open to chats — frontend / full-stack / AI-product roles.',
-    'Best path: `mail` (agent@joyehuang.dev) or `connect` for socials.'
-  ],
-  stack: [
-    'Astro 5 · React 19 · UnoCSS · TypeScript · deployed on Vercel.',
-    'I lean into server-rendered HTML with small interactive islands.'
-  ]
-}
-
-function pickReply(msg: string): string[] {
-  const m = msg.toLowerCase()
-  if (m.includes('build')) return MOCK_AGENT_REPLIES.building
-  if (m.includes('hire') || m.includes('job') || m.includes('work')) return MOCK_AGENT_REPLIES.hire
-  if (m.includes('stack') || m.includes('tech')) return MOCK_AGENT_REPLIES.stack
-  return MOCK_AGENT_REPLIES.default
-}
-
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
 function nodeBadge(node: FsNode): string {
@@ -95,27 +67,26 @@ export const commands: CommandRegistry = {
 
   whoami: {
     name: 'whoami',
-    summary: 'about Joye',
+    summary: 'a short introduction',
     run: ({ push }) => {
       push([
         {
           kind: 'node',
           node: (
             <span>
-              <span className='wt-tone-primary'>Joye</span>
-              <span className='wt-tone-muted'> · Frontend developer based in Melbourne</span>
+              <span className='wt-tone-primary'>Yu</span>
+              <span className='wt-tone-muted'> · 信息与计算科学本科生</span>
             </span>
           )
         },
-        { kind: 'text', tone: 'muted', text: '  ↳ 2nd-year CS @ University of Melbourne' },
-        { kind: 'text', tone: 'muted', text: '  ↳ AIGC full-stack intern @ Tezign' },
         {
           kind: 'text',
           tone: 'muted',
-          text: '  ↳ stays hungry, stays foolish · plays piano + cello'
+          text: '  ↳ AI Agent、Coding Agent、LLM 应用与相关工程系统'
         },
+        { kind: 'text', tone: 'muted', text: '  ↳ 学习后端与 AI Infra' },
         { kind: 'spacer' },
-        { kind: 'text', tone: 'muted', text: 'next: try `ls`, `cat about`, or `cd /blog`' }
+        { kind: 'text', tone: 'muted', text: 'next: try `about`, `blog`, or `notes`' }
       ])
     }
   },
@@ -371,67 +342,6 @@ export const commands: CommandRegistry = {
     }
   },
 
-  manifest: {
-    name: 'manifest',
-    summary: 'fetch the agent-facing site map (well-known JSON)',
-    usage: 'manifest [--url]',
-    run: async ({ args, push }) => {
-      const url = '/.well-known/joye-manifest.json'
-      // `manifest --url` just prints the public URL (handy for sharing)
-      if (args[0] === '--url' || args[0] === '-u') {
-        push([
-          {
-            kind: 'node',
-            node: (
-              <span>
-                <span className='wt-tone-muted'>public manifest: </span>
-                <a className='wt-link' href={url} target='_blank' rel='noreferrer'>
-                  {url}
-                </a>
-              </span>
-            )
-          }
-        ])
-        return
-      }
-      push([{ kind: 'text', tone: 'muted', text: `fetching ${url} …` }])
-      try {
-        const r = await fetch(url, { headers: { accept: 'application/json' } })
-        if (!r.ok) throw new Error(`HTTP ${r.status}`)
-        const text = await r.text()
-        // Single node — rendering 200+ separate lines through setState
-        // each was choking React, so dump the whole pretty JSON in one
-        // <pre> with a small banner above it.
-        push([
-          {
-            kind: 'node',
-            node: (
-              <span>
-                <span className='wt-tone-muted'>fetched · </span>
-                <a className='wt-link' href={url} target='_blank' rel='noreferrer'>
-                  view raw
-                </a>
-              </span>
-            )
-          },
-          { kind: 'spacer' },
-          {
-            kind: 'node',
-            node: <pre className='wt-json'>{text}</pre>
-          }
-        ])
-      } catch (err) {
-        push([
-          {
-            kind: 'text',
-            tone: 'err',
-            text: `manifest: ${err instanceof Error ? err.message : 'fetch failed'}`
-          }
-        ])
-      }
-    }
-  },
-
   design: {
     name: 'design',
     summary: 'download DESIGN.md',
@@ -456,76 +366,6 @@ export const commands: CommandRegistry = {
         a.click()
         a.remove()
       }
-    }
-  },
-
-  chat: {
-    name: 'chat',
-    summary: 'talk to my agent (mock)',
-    usage: 'chat [message]',
-    run: async ({ args, startStream, appendStream, endStream }) => {
-      const message = args.join(' ').trim()
-      const id = `chat-${Date.now()}`
-      startStream(id)
-      appendStream(id, { kind: 'text', tone: 'muted', text: '⠋ thinking…' })
-      await sleep(420)
-      const lines = message ? pickReply(message) : MOCK_AGENT_REPLIES.default
-      appendStream(id, { kind: 'spacer' })
-      for (const line of lines) {
-        appendStream(id, {
-          kind: 'node',
-          node: (
-            <span>
-              <span className='wt-tone-primary'>agent ▸ </span>
-              <span className='wt-tone-fg'>{line}</span>
-            </span>
-          )
-        })
-        await sleep(260)
-      }
-      endStream(id)
-    }
-  },
-
-  mail: {
-    name: 'mail',
-    summary: 'send me an email',
-    run: ({ push }) => {
-      const href = 'mailto:agent@joyehuang.dev?subject=hi%20joye'
-      push([
-        { kind: 'text', tone: 'muted', text: 'opening your mail client…' },
-        {
-          kind: 'node',
-          node: (
-            <a className='wt-link' href={href}>
-              agent@joyehuang.dev
-            </a>
-          )
-        }
-      ])
-      setTimeout(() => {
-        if (typeof window !== 'undefined') window.location.href = href
-      }, 200)
-    }
-  },
-
-  connect: {
-    name: 'connect',
-    summary: 'social links',
-    run: ({ push }) => {
-      push(
-        SOCIAL_LINKS.map<OutputLine>((s) => ({
-          kind: 'node',
-          node: (
-            <span>
-              <span className='wt-tone-primary'>{s.label.padEnd(10)}</span>
-              <a className='wt-link' href={s.href} target='_blank' rel='noreferrer'>
-                {s.href}
-              </a>
-            </span>
-          )
-        }))
-      )
     }
   },
 
@@ -585,22 +425,50 @@ export const commands: CommandRegistry = {
   about: {
     name: 'about',
     summary: 'alias of `cat about`',
-    hidden: true,
     run: (ctx) => commands.cat.run({ ...ctx, args: ['/about'] })
+  },
+
+  projects: {
+    name: 'projects',
+    summary: 'open the projects page',
+    run: (ctx) => commands.open.run({ ...ctx, args: ['/projects'] })
+  },
+
+  blog: {
+    name: 'blog',
+    summary: 'open the blog',
+    run: (ctx) => commands.open.run({ ...ctx, args: ['/blog'] })
+  },
+
+  notes: {
+    name: 'notes',
+    summary: 'open the notes',
+    run: (ctx) => commands.open.run({ ...ctx, args: ['/notes'] })
+  },
+
+  github: {
+    name: 'github',
+    summary: 'open GitHub',
+    run: ({ push }) => {
+      const github = SOCIAL_LINKS[0]
+      push([
+        {
+          kind: 'node',
+          node: (
+            <a className='wt-link' href={github.href} target='_blank' rel='noreferrer'>
+              {github.href}
+            </a>
+          )
+        }
+      ])
+    }
   },
 
   sudo: {
     name: 'sudo',
     summary: 'nice try',
     hidden: true,
-    run: ({ args, push }) => {
-      if (args.join(' ') === 'hire-me') {
-        push([
-          { kind: 'text', tone: 'ok', text: '✓ permission granted.' },
-          { kind: 'text', tone: 'muted', text: '`mail` to start the conversation.' }
-        ])
-        return
-      }
+    run: ({ push }) => {
       push([
         { kind: 'text', tone: 'err', text: 'Permission denied (you are not in the sudoers file).' }
       ])

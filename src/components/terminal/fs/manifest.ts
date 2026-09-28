@@ -59,13 +59,7 @@ export function buildManifest({ blog, blogEn, notes, notesEn, curated, talks }: 
       buildPostsDir('curated', 'curated external readings and digests', curated, '/curated'),
       buildPostsDir('talks', 'weekly sharing sessions', talks, '/talks'),
       buildContactDir(),
-      buildEtcDir(),
-      {
-        type: 'link',
-        name: 'manifest',
-        description: 'agent-facing site map (well-known JSON)',
-        href: '/.well-known/joye-manifest.json'
-      }
+      buildEtcDir()
     ]
   }
 }
@@ -93,7 +87,6 @@ function buildPostDir(p: FsCollectionEntry, hrefRoot: string): DirNode {
   const lang = p.data.language ?? inferLang(p)
   const href = hrefFor(p, hrefRoot)
   const endpoint = `/api/knowledge/content/${p.kind}/${encodeURI(p.id)}`
-  const canonicalUrl = `https://joyehuang.me${href}`
   const metaContent = formatMeta({
     title: p.data.title,
     date,
@@ -103,7 +96,6 @@ function buildPostDir(p: FsCollectionEntry, hrefRoot: string): DirNode {
     tags,
     href,
     endpoint,
-    canonical_url: canonicalUrl,
     content_hash: p.data.contentHash
   })
   const extra = p.data.extra ?? {}
@@ -125,7 +117,6 @@ function buildPostDir(p: FsCollectionEntry, hrefRoot: string): DirNode {
       tags,
       endpoint,
       href,
-      canonical_url: canonicalUrl,
       content_hash: p.data.contentHash,
       collection: p.kind,
       id: p.id,
@@ -146,7 +137,6 @@ function buildPostDir(p: FsCollectionEntry, hrefRoot: string): DirNode {
           tags,
           endpoint,
           href,
-          canonical_url: canonicalUrl,
           content_hash: p.data.contentHash,
           collection: p.kind,
           id: p.id,
@@ -173,7 +163,6 @@ function buildPostDir(p: FsCollectionEntry, hrefRoot: string): DirNode {
           lang,
           endpoint,
           href,
-          canonical_url: canonicalUrl,
           content_hash: p.data.contentHash,
           collection: p.kind,
           id: p.id
