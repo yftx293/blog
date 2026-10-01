@@ -9,6 +9,7 @@ import { cn } from 'astro-pure/utils'
 interface Props {
   class?: string
   analyticsSection?: string
+  showFullDescription?: boolean
   project: {
     id?: string
     analyticsEvent?: 'agent_competition_click' | 'project_link_click'
@@ -21,7 +22,7 @@ interface Props {
     }[]
   }[]
 }
-const { analyticsSection, class: className, project, ...props } = Astro.props
+const { analyticsSection, class: className, project, showFullDescription = false, ...props } = Astro.props
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/projects/*.{jpeg,jpg,png,gif}'
 )
@@ -111,7 +112,12 @@ const analyticsAttrs = (
               >
                 {project.name}
               </a>
-              <div class='project-description leading-snug text-muted-foreground sm:h-12'>
+              <div
+                class={cn(
+                  'project-description leading-snug text-muted-foreground',
+                  !showFullDescription && 'project-description-clamp sm:h-12'
+                )}
+              >
                 {project.description}
               </div>
               <div class='flex flex-row items-center gap-x-2 sm:gap-x-3'>
@@ -149,7 +155,7 @@ const analyticsAttrs = (
     text-overflow: ellipsis;
     word-break: break-word;
   }
-  .project-description {
+  .project-description-clamp {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;

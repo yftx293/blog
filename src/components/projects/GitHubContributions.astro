@@ -11,10 +11,11 @@ interface Props {
   displayName?: string
 }
 
-const { username = 'joyehuang', displayName } = Astro.props
+const { username = 'yftx293', displayName } = Astro.props
 
 let total = 0
 let contributions: Contribution[] = []
+let hasContributionData = false
 
 // Hit our own /api endpoint — it proxies the authenticated GitHub GraphQL
 // API so the calendar includes private contributions (the public scrape
@@ -28,6 +29,7 @@ try {
     const data = (await res.json()) as ApiResponse
     contributions = data.contributions ?? []
     total = data.total?.lastYear ?? 0
+    hasContributionData = true
   }
 } catch {
   // network blip during build — render an empty grid
@@ -129,8 +131,12 @@ const formattedTotal = total.toLocaleString('en-US')
       />
       <div class='flex flex-col leading-tight'>
         <span class='text-sm font-semibold'>{caption}</span>
-        <span class='text-xs text-muted-foreground' data-total-label>
-          {formattedTotal} contributions
+        <span
+          class='text-xs text-muted-foreground'
+          data-total-label
+          data-has-contribution-data={hasContributionData ? 'true' : 'false'}
+        >
+          {hasContributionData ? `${formattedTotal} contributions` : 'GitHub activity temporarily unavailable'}
         </span>
       </div>
       <a
@@ -678,6 +684,13 @@ const formattedTotal = total.toLocaleString('en-US')
 
     const today = new Date().toISOString().slice(0, 10)
     const contributions = (data.contributions || []).filter((c) => c.date <= today)
+    const totalEl = figure.querySelector('[data-total-label]')
+    const total = data.total?.lastYear ?? 0
+    if (totalEl) {
+      totalEl.textContent = `${total.toLocaleString('en-US')} contributions`
+      totalEl.dataset.hasContributionData = 'true'
+    }
+
     if (contributions.length === 0) return
 
     // Bail if the grid is already up to date (server-side fetch was fresh).
@@ -747,8 +760,5 @@ const formattedTotal = total.toLocaleString('en-US')
         })
       )
     }
-    const totalEl = figure.querySelector('[data-total-label]')
-    const total = data.total?.lastYear ?? 0
-    if (totalEl) totalEl.textContent = `${total.toLocaleString('en-US')} contributions`
   }
 </script>
