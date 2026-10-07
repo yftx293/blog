@@ -48,12 +48,6 @@ const sections: Record<string, [string, string, string, string]> = {
     'Note tags',
     'Find learning notes, code snippets, research records, and developing ideas by tag.'
   ],
-  '/archives/agent-onboarding-guide-v1': [
-    '【存档】Agent 入门指南 v1.0',
-    '2026 年 5 月 17 日发布的 Agent 入门指南 v1.0 历史存档，保留当时的学习路线与内容，并提供最新版本入口。',
-    'Agent onboarding guide v1 archive',
-    'The original May 17, 2026 Agent onboarding guide, preserved as a historical snapshot with a link to the maintained version.'
-  ],
   '/v2': [
     'Joye · AI Agent 产品工程师 · V2',
     'Joye 的 V2 个人主页，展示 AI Agent 项目、开源仓库与近期文章和笔记。',
