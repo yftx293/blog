@@ -16,7 +16,8 @@ const allCurated = sortCuratedEntries(
 <PageLayout
   meta={{
     title: 'Curated',
-    description: '筛选过的技术博客、论文、报告和 repo。'
+    description: '筛选过的技术博客、论文、报告和 repo。',
+    noindex: allCurated.length === 0
   }}
   highlightColor='#659EB9'
 >
