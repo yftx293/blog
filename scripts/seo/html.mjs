@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-export const origin = 'https://www.joyehuang.me'
+export const origin = process.env.SITE_URL ?? 'https://blog-sandy-psi-42.vercel.app'
 export const hash = (text) => createHash('sha256').update(text).digest('hex')
 export const decode = (s = '') =>
   s

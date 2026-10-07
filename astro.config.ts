@@ -38,6 +38,8 @@ const excludedSitemapPathPatterns = [
   /^\/\.well-known\/joye-manifest\.json$/
 ]
 
+const siteUrl = process.env.SITE_URL ?? 'https://blog-sandy-psi-42.vercel.app'
+
 const shouldIncludeInSitemap = (page: string) => {
   const { pathname } = new URL(page)
   return !excludedSitemapPathPatterns.some((pattern) => pattern.test(pathname))
@@ -56,9 +58,9 @@ const exposeSingleSitemap = (): AstroIntegration => ({
           ...sectionMetadata(path),
           noindex: false,
           alternates: [
-            { lang: 'zh-CN', url: 'https://www.joyehuang.me/about' },
-            { lang: 'en', url: 'https://www.joyehuang.me/en/about' },
-            { lang: 'x-default', url: 'https://www.joyehuang.me/about' }
+            { lang: 'zh-CN', url: `${siteUrl}/about` },
+            { lang: 'en', url: `${siteUrl}/en/about` },
+            { lang: 'x-default', url: `${siteUrl}/about` }
           ],
           sources: [
             `src/pages${path}/index.astro`,
@@ -106,7 +108,7 @@ const jojoAlias = (entry: 'runtime' | 'static') =>
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: 'https://www.joyehuang.me',
+  site: siteUrl,
   // base: '/docs',
   trailingSlash: 'never',
 

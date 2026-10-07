@@ -111,15 +111,16 @@ function inferLanguage(collection: PublicCollection): string {
 }
 
 function canonicalUrl(collection: PublicCollection, entry: KnowledgeEntry): string {
+  const siteUrl = import.meta.env.SITE.replace(/\/$/, '')
   const routeId =
     collection.endsWith('_en') && entry.data.translationKey ? entry.data.translationKey : entry.id
   const encoded = encodeURI(routeId)
-  if (collection === 'blog') return `https://joyehuang.me/blog/${encoded}`
-  if (collection === 'blog_en') return `https://joyehuang.me/en/blog/${encoded}`
-  if (collection === 'notes') return `https://joyehuang.me/notes/${encoded}`
-  if (collection === 'notes_en') return `https://joyehuang.me/en/notes/${encoded}`
-  if (collection === 'curated') return `https://joyehuang.me/curated#${encodeURIComponent(routeId)}`
-  return `https://joyehuang.me/talks#${encodeURIComponent(routeId)}`
+  if (collection === 'blog') return `${siteUrl}/blog/${encoded}`
+  if (collection === 'blog_en') return `${siteUrl}/en/blog/${encoded}`
+  if (collection === 'notes') return `${siteUrl}/notes/${encoded}`
+  if (collection === 'notes_en') return `${siteUrl}/en/notes/${encoded}`
+  if (collection === 'curated') return `${siteUrl}/curated#${encodeURIComponent(routeId)}`
+  return `${siteUrl}/talks#${encodeURIComponent(routeId)}`
 }
 
 function formatDate(value: Date | string | undefined): string {
