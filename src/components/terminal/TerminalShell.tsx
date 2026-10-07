@@ -1,7 +1,6 @@
+import { trackSiteEvent } from '@/lib/analytics'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-
-import { trackSiteEvent } from '@/lib/analytics'
 
 import { classifyTerminalCommand } from './analytics'
 import { commands, completeInput } from './commands'
@@ -152,8 +151,7 @@ export default function Terminal({ user = 'yu', host = ROOT_LABEL }: Props) {
   const idRef = useRef(0)
   const newId = () => `e${++idRef.current}`
 
-  // fetch the pseudo-FS instead of embedding it server-side (shared cache in
-  // fs/client — DevMode reuses the same in-flight request). A failed fetch
+  // Fetch the pseudo-FS instead of embedding it server-side. A failed fetch
   // resets that cache, so calling this again (from the `!fs` guard in
   // runInput below) genuinely retries instead of replaying a stale failure.
   const loadFs = useCallback(() => {

@@ -4,12 +4,14 @@ import { createServer } from 'node:http'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
+import { origin } from './site.mjs'
+
 const { default: handler } = await import(
   pathToFileURL(resolve('.vercel/output/functions/_render.func/dist/server/entry.mjs')).href
 )
 const server = createServer((req, res) => {
-  req.headers.host = 'www.joyehuang.me'
-  req.headers['x-forwarded-proto'] = 'https'
+  req.headers.host = new URL(origin).host
+  req.headers['x-forwarded-proto'] = new URL(origin).protocol.slice(0, -1)
   handler(req, res).catch(() => {
     res.statusCode = 500
     res.end('render failed')

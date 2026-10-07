@@ -39,7 +39,7 @@ const QUERY = `
 `
 
 export const GET: APIRoute = async ({ url }) => {
-  const username = url.searchParams.get('username') ?? 'joyehuang'
+  const username = url.searchParams.get('username') ?? 'yftx293'
   const token = import.meta.env.GITHUB_TOKEN ?? process.env.GITHUB_TOKEN
 
   if (!token) {
@@ -53,7 +53,7 @@ export const GET: APIRoute = async ({ url }) => {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-        'User-Agent': 'joyehuang.me'
+        'User-Agent': 'yftx293-blog'
       },
       body: JSON.stringify({ query: QUERY, variables: { login: username } })
     })
@@ -71,7 +71,13 @@ export const GET: APIRoute = async ({ url }) => {
         contributionsCollection?: {
           contributionCalendar?: {
             totalContributions: number
-            weeks: { contributionDays: { date: string; contributionCount: number; contributionLevel: string }[] }[]
+            weeks: {
+              contributionDays: {
+                date: string
+                contributionCount: number
+                contributionLevel: string
+              }[]
+            }[]
           }
         }
       }

@@ -9,7 +9,7 @@
  *   </TldrCard>
  *
  * Quiet, editorial: a muted fill with a hairline border, no shadow, no
- * accent gradient, body font only (see DESIGN.md → Overview, Typography).
+ * accent gradient, body font only.
  * The slot is a markdown list; the post's prose list styling applies.
  */
 interface Props {
@@ -19,7 +19,10 @@ interface Props {
 const { label = 'TL;DR' } = Astro.props
 ---
 
-<aside class='tldr not-prose my-8 rounded-lg border bg-muted/40 px-5 py-4 sm:px-6' aria-label={label}>
+<aside
+  class='tldr not-prose my-8 rounded-lg border bg-muted/40 px-5 py-4 sm:px-6'
+  aria-label={label}
+>
   <p class='m-0 text-xs font-medium uppercase tracking-wider text-muted-foreground'>{label}</p>
   <div class='tldr-body mt-2 text-[0.95rem] leading-relaxed text-foreground'>
     <slot />

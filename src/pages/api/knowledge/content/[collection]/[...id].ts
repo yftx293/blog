@@ -114,12 +114,13 @@ function canonicalUrl(collection: PublicCollection, entry: KnowledgeEntry): stri
   const routeId =
     collection.endsWith('_en') && entry.data.translationKey ? entry.data.translationKey : entry.id
   const encoded = encodeURI(routeId)
-  if (collection === 'blog') return `https://joyehuang.me/blog/${encoded}`
-  if (collection === 'blog_en') return `https://joyehuang.me/en/blog/${encoded}`
-  if (collection === 'notes') return `https://joyehuang.me/notes/${encoded}`
-  if (collection === 'notes_en') return `https://joyehuang.me/en/notes/${encoded}`
-  if (collection === 'curated') return `https://joyehuang.me/curated#${encodeURIComponent(routeId)}`
-  return `https://joyehuang.me/talks#${encodeURIComponent(routeId)}`
+  const site = import.meta.env.SITE
+  if (collection === 'blog') return new URL(`/blog/${encoded}`, site).href
+  if (collection === 'blog_en') return new URL(`/en/blog/${encoded}`, site).href
+  if (collection === 'notes') return new URL(`/notes/${encoded}`, site).href
+  if (collection === 'notes_en') return new URL(`/en/notes/${encoded}`, site).href
+  if (collection === 'curated') return new URL(`/curated#${encodeURIComponent(routeId)}`, site).href
+  return new URL(`/talks#${encodeURIComponent(routeId)}`, site).href
 }
 
 function formatDate(value: Date | string | undefined): string {

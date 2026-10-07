@@ -13,7 +13,7 @@ export const theme: ThemeUserConfig = {
   description: 'Learning, building, and thinking in public',
 
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
-  favicon: '/favicon/favicon.ico',
+  favicon: '/favicon/avatar.png',
 
   /** Specify the default language for this site. */
   locale: {
@@ -67,18 +67,6 @@ export const theme: ThemeUserConfig = {
         link: '/blog'
       },
       {
-        title: 'Notes',
-        link: '/notes'
-      },
-      {
-        title: 'Lab',
-        link: '/lab'
-      },
-      {
-        title: 'Talks',
-        link: '/talks'
-      },
-      {
         title: 'Projects',
         link: '/projects'
       },
@@ -128,8 +116,7 @@ export const integ: IntegrationUserConfig = {
   // See: https://astro-pure.js.org/docs/integrations/links
   links: {
     // Friend logbook
-    // Joye 原来的友链记录已经清空，
-    // 以后这里记录你自己的友链变化。
+    // Add new friend links here when you are ready to publish them.
     logbook: [],
 
     // Yourself link info
@@ -184,7 +171,7 @@ export const integ: IntegrationUserConfig = {
     enable: false,
 
     // 这里暂时保留原字段结构，关闭后不会加载评论。
-    server: 'https://waline.joyehuang.me',
+    server: '',
 
     additionalConfigs: {
       pageview: false,
