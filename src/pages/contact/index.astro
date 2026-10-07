@@ -1,20 +1,62 @@
 ---
 export const prerender = true
 import PageLayout from '@/layouts/CommonPage.astro'
+import ContactQR from '@/components/contact/ContactQR.astro'
+import qqGroup from '@/assets/qq-group-contact.jpg'
 
-const headings = [{ depth: 2, slug: 'github', text: '通过 GitHub 联系' }]
+const headings = [
+  { depth: 2, slug: 'how-to-reach', text: 'How to reach me' },
+  { depth: 2, slug: 'before-you-add', text: 'Before you add me' }
+]
 ---
 
 <PageLayout title='Contact' {headings} info='/contact'>
   <p>
-    如果想交流 AI Agent、Coding Agent、LLM 应用、工程实践或博客内容，可以通过 GitHub 找到我。
+    欢迎来聊。技术、求职、博客协作、找朋友闲聊都可以。
+    我会比较慢回，但都会回。
   </p>
 
-  <h2 id='github'>通过 GitHub 联系</h2>
+  <h2 id='how-to-reach'>如何联系我</h2>
   <p>
-    <a href='https://github.com/yftx293' target='_blank' rel='noopener noreferrer'>
-      github.com/yftx293
-    </a>
+    <strong>📢 公告：自 2026 年 9 月 3 日起，所有付费咨询服务（付费咨询 / 模拟面试 / 简历辅导）全面下架，不再接受新的预约。感谢大家一直以来的支持。</strong>
   </p>
-  <p>目前只公开 GitHub，其他联系方式以后有需要再补充。</p>
+  <p>
+    把鼠标移到卡片上即可看到二维码。日常交流请走粉丝群，每周还有线上分享会。
+  </p>
+  <ContactQR
+    class='my-6'
+    items={[
+      {
+        name: '粉丝交流群（QQ）· 日常交流来这',
+        hint: '悬停显示二维码',
+        image: qqGroup,
+        methodName: 'qq_group',
+        note: '群号 831907794 · 入群答题：博客最新一篇文章的标题'
+      }
+    ]}
+  />
+
+  <p>
+    群定位是 Agent / AI Native 技术交流与学习：行业新闻、产品动态、学习心得、项目复盘、优质资源和有价值的问题都在欢迎之列，
+    从业者和初学者都有——分享自己的理解、帮别人看问题，本身也是学习的一部分。提问尽量带上背景、报错和已经试过的方法，
+    别只发「这个怎么做」。完整群规进群看公告。
+  </p>
+
+  <p>
+    上面的 QQ 群每周会办一次线上交流会，轮流分享技术、求职和 AI 行业的东西。
+    每期聊到的内容和幻灯片，都整理在 <a href='/talks'>分享会</a> 页面里公开沉淀；想参与就扫上面的码进群。
+  </p>
+
+  <h2 id='before-you-add'>加之前请看一下</h2>
+  <ul>
+    <li>
+      <strong>请简单说明来意</strong>。一句话就行，比如「想聊 Agent 开发」「博客求合作」。没有备注的好友请求我大概率不会通过。
+    </li>
+    <li>
+      <strong>商务 / 推广 / 招聘需求</strong>请直接说明背景和合作形式，避免「在吗」式开场。
+    </li>
+    <li>
+      <strong>QQ 群以技术与生活交流为主</strong>，禁止广告、刷屏、外链拉人。违反会被移出。
+    </li>
+  </ul>
 </PageLayout>

@@ -22,13 +22,7 @@ interface Props {
     }[]
   }[]
 }
-const {
-  analyticsSection,
-  class: className,
-  project,
-  showFullDescription = false,
-  ...props
-} = Astro.props
+const { analyticsSection, class: className, project, showFullDescription = false, ...props } = Astro.props
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/projects/*.{jpeg,jpg,png,gif}'
 )
@@ -50,7 +44,7 @@ const analyticsAttrs = (
   link: Props['project'][number]['links'][number]
 ) => {
   // Internal links are answered by the destination pageview — don't double-track
-  // them as click events.
+  // them as click events (see ANALYTICS.md tracking boundary).
   if (!/^https?:\/\//i.test(link.href)) return {}
 
   const eventName = project.analyticsEvent ?? 'project_link_click'

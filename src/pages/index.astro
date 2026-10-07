@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
+import { renderJojoSvg } from '@jojo-web/static'
 import avatar from 'src/assets/avatar.png'
 
 import { Quote } from 'astro-pure/advanced'
@@ -9,11 +10,40 @@ import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
 import { Button, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
+import SiteStats from '@/components/home/SiteStats.astro'
+import SkillLayout from '@/components/home/SkillLayout.astro'
 import LegacyIntroOverlay from '@/components/intro/LegacyIntroOverlay.astro'
+import JojoHero from '@/components/jojo/JojoHero'
+import JojoIntro from '@/components/jojo/JojoIntro.astro'
 import Terminal from '@/components/terminal/Terminal.astro'
 import config from '@/site-config'
 
 export const prerender = true
+
+// Jojo seat: the calm frame as build-time SVG; the engine loads only when it moves
+const jojoSeatSvg = __JOJO__
+  ? renderJojoSvg({
+      idPrefix: 'seat-s',
+      emotion: 'calm',
+      size: 48,
+      framing: 'tight',
+      decorative: true
+    })
+  : ''
+
+const languages = ['TypeScript', 'JavaScript', 'Python', 'SQL']
+const frontend = ['React', 'Next.js', 'Tailwind CSS', 'Remotion', 'Vite']
+const backend = ['Node.js', 'Vercel', 'Supabase', 'AWS', 'Stripe', 'Inngest']
+const ai = [
+  'Claude Code',
+  'LLM',
+  'Transformer',
+  'Multi-Agent',
+  'RAG',
+  'Function Calling',
+  'Prompt Engineering'
+]
+const tools = ['Cursor', 'Git', 'Docker', 'Bun', 'Figma', 'ESLint/Prettier']
 
 const MAX_POSTS = 5
 const allPosts = await getBlogCollection()
@@ -32,10 +62,13 @@ const allNotes = (await getCollection('notes')).filter((e) => !e.data.draft)
 const latestNotes = allNotes
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, MAX_NOTES)
+
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB9'>
-  <LegacyIntroOverlay />
+  {/* Jojo on → the build-the-site intro replaces the particle intro and the ASCII mascot */}
+  {!__JOJO__ && <LegacyIntroOverlay />}
+  <JojoIntro />
   <main class='flex w-full flex-col items-center'>
     <section
       class='animate mb-10 flex flex-col items-center gap-y-7 relative z-50'
@@ -46,14 +79,17 @@ const latestNotes = allNotes
           src={avatar}
           alt='profile'
           data-intro-target='avatar'
+          data-jojo-piece='avatar'
           class='h-28 w-auto rounded-full border p-1'
           loading='eager'
         />
+        {__JOJO__ && <JojoHero client:idle lang='zh' staticSvg={jojoSeatSvg} />}
       </div>
 
       <div class='flex flex-col items-center gap-y-4'>
-        <h1 class='text-3xl font-bold'>{config.author}</h1>
-        <div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
+        <h1 class='text-3xl font-bold' data-jojo-piece='name'>{config.author}</h1>
+        <div class='flex flex-wrap justify-center gap-x-7 gap-y-3' data-jojo-piece='labels'>
+
           <Label
             title='GitHub'
             as='a'
@@ -69,7 +105,7 @@ const latestNotes = allNotes
       </div>
 
       {/* Connect Me! */}
-      <div class='flex flex-row gap-3'>
+      <div class='flex flex-row gap-3' data-jojo-piece='connect'>
         <a
           href='/contact'
           class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
@@ -89,13 +125,13 @@ const latestNotes = allNotes
       id='content'
       class='animate relative z-0 flex w-full min-w-0 max-w-full flex-col gap-y-10 md:w-4/5 lg:w-5/6'
     >
-      <div class='-mt-2'>
+      <div class='-mt-2' data-jojo-piece='card'>
         <Terminal />
       </div>
-      <Section title='About'>
-        <p class='text-muted-foreground'>AI Agent · Coding Agent · 工程实践</p>
+      <Section title='About' data-jojo-piece='about'>
+        <p class='text-muted-foreground'>AI Agent & Full-Stack Developer</p>
         <p class='text-muted-foreground'>
-          在学习和构建 AI Agent、Coding Agent 与 LLM 应用，也在这里记录一些尚未完成的理解。
+           在学习和构建 AI Agent、Coding Agent 与 LLM 应用，也在这里记录一些尚未完成的理解。
         </p>
         <Button title='More about me' class='w-fit self-end' href='/about' style='ahead' />
       </Section>
@@ -165,6 +201,16 @@ const latestNotes = allNotes
           </Section>
         )
       }
+
+      <Section title='Skills'>
+        <SkillLayout title='Languages' skills={languages} />
+        <SkillLayout title='Frontend' skills={frontend} />
+        <SkillLayout title='Backend' skills={backend} />
+        <SkillLayout title='AI & Agent' skills={ai} />
+        <SkillLayout title='Tools' skills={tools} />
+      </Section>
+
+      <SiteStats />
     </div>
     <Quote class='mt-12' />
   </main>

@@ -1,21 +1,57 @@
 ---
-import PageLayout from '@/layouts/CommonPage.astro'
-
 export const prerender = true
+import PageLayout from '@/layouts/CommonPage.astro'
+import ContactQR from '@/components/contact/ContactQR.astro'
+import qqGroup from '@/assets/qq-group-contact.jpg'
 
-const headings = [{ depth: 2, slug: 'github', text: 'Find me on GitHub' }]
+const headings = [
+  { depth: 2, slug: 'how-to-reach', text: 'How to reach me' },
+  { depth: 2, slug: 'before-you-add', text: 'Before you add me' }
+]
 ---
 
 <PageLayout title='Contact' {headings} info='/en/contact'>
   <p>
-    If you'd like to discuss AI agents, coding agents, engineering, or something on this blog, you
-    can reach me on GitHub.
+    Happy to chat — tech, job hunting, blog collaborations, or just hanging out.
+    I'm slow to reply, but I do reply.
   </p>
 
-  <h2 id='github'>Find me on GitHub</h2>
+  <h2 id='how-to-reach'>How to reach me</h2>
   <p>
-    <a href='https://github.com/yftx293' target='_blank' rel='noopener noreferrer'
-      >github.com/yftx293</a>
+    <strong>📢 Notice: as of September 3, 2026, all paid services (paid consulting / mock interviews / résumé coaching) have been discontinued and new bookings are no longer accepted. Thank you for all the support.</strong>
   </p>
-  <p>GitHub is the only contact method I currently share here.</p>
+  <p>Hover over a card to reveal the QR code. For everyday discussion, join the fan QQ group — there's a weekly online talk too.</p>
+  <ContactQR
+    class='my-6'
+    items={[
+      {
+        name: 'Fan Chat Group (QQ) · for everyday discussion',
+        hint: 'Hover to reveal QR',
+        image: qqGroup,
+        methodName: 'qq_group',
+        note: 'Group number 831907794 · Verification: title of my latest blog post.'
+      }
+    ]}
+  />
+
+  <p>
+    The group is a space for Agent / AI Native tech exchange and learning: industry news, product updates,
+    learning notes, project retrospectives, quality resources, and worthwhile questions are all welcome —
+    practitioners and beginners alike. Sharing your own understanding or helping answer someone else's question
+    is part of how everyone learns here. When asking, include context, the error, and what you've tried.
+    Full rules are in the group announcement.
+  </p>
+
+  <h2 id='before-you-add'>Before you add me</h2>
+  <ul>
+    <li>
+      <strong>Tell me why you're reaching out</strong>. One sentence is enough — e.g. "booking a mock interview" or "blog collab". Friend requests with no note will likely be ignored.
+    </li>
+    <li>
+      <strong>Business / promotion / recruiting</strong>: please share the context and what kind of collaboration you have in mind upfront, instead of opening with "hi".
+    </li>
+    <li>
+      <strong>The QQ group is for tech and life chat</strong>. No ads, spam, or off-platform recruiting — violators will be removed.
+    </li>
+  </ul>
 </PageLayout>

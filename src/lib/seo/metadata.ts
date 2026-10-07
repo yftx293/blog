@@ -2,33 +2,33 @@
 const sections: Record<string, [string, string, string, string]> = {
   '/': [
     '首页',
-    'Yu 的个人博客，记录 AI Agent、Coding Agent、软件工程与学习实践。',
+    'Joye 的个人博客：记录 AI Agent、软件工程与学习实践，汇集技术文章、笔记和开源项目。',
     'Home',
-    "Yu's blog about AI agents, coding agents, software engineering, and learning in public."
+    'Joye’s personal blog on AI agents, software engineering, and learning, with technical articles, notes, and open-source projects.'
   ],
   '/about': [
     '关于我',
-    '了解 Yu 的学习背景、当前关注的技术方向，以及这个博客的写作计划。',
+    '了解 Joye：个人介绍、学习与开发经历，以及日常使用的开发工具、设计软件和设备。',
     'About',
-    'Meet Yu, learn about current interests in AI agents and software engineering, and why this blog exists.'
+    'Meet Joye: personal background, learning and development experience, and the tools, design software, and equipment used day to day.'
   ],
   '/contact': [
     '联系我',
-    '通过 GitHub 联系 Yu，交流 AI Agent、Coding Agent、工程实践或博客内容。',
+    '通过 QQ 群与 Joye 交流 Agent / AI Native 技术、学习心得和项目实践，参与每周线上分享，并了解联系前的说明。',
     'Contact',
-    'Contact Yu on GitHub to discuss AI agents, coding agents, engineering practice, or the blog.'
+    'Join Joye’s QQ community for Agent / AI Native discussions, learning notes, project retrospectives, and weekly talks. Read the guidelines before reaching out.'
   ],
   '/projects': [
     '项目',
-    '浏览 Yu 的开源项目与工程实践，包括 Coding Agent、Agentic RAG 和 AI PR Review。',
+    'Joye 的开源项目、参与开发的产品和学习实践，包括 OpenHarness 教程、LLM 学习与开发工具。',
     'Projects',
-    "Explore Yu's projects in coding agents, agentic RAG, and AI assisted code review."
+    'Explore Joye’s open-source projects, product contributions, and learning projects, including OpenHarness tutorials, LLM studies, and developer tools.'
   ],
   '/links': [
     '友情链接',
-    '记录朋友的网站，以及值得长期关注的项目和文章。',
+    'Joye 的朋友与独立博客，发现不同作者的技术记录、生活分享和个人网站。',
     'Links',
-    'A place for friends, independent blogs, and projects worth revisiting.'
+    'Discover friends and independent blogs in Joye’s blogroll, with links to personal websites, technical writing, and everyday stories.'
   ],
   '/curated': [
     '精选阅读',
@@ -48,11 +48,17 @@ const sections: Record<string, [string, string, string, string]> = {
     'Note tags',
     'Find learning notes, code snippets, research records, and developing ideas by tag.'
   ],
+  '/v2': [
+    'Joye · AI Agent 产品工程师 · V2',
+    'Joye 的 V2 个人主页，展示 AI Agent 项目、开源仓库与近期文章和笔记。',
+    'Joye — AI Agent Product Engineer · V2',
+    'Joye’s V2 portfolio with AI agent projects, open-source repositories, and recent articles and notes.'
+  ],
   '/archives': [
     '文章归档',
-    '按年份回顾 Yu 发布的博客文章，查找技术学习与工程实践记录。',
+    '按年份回顾 Joye 已发布的博客文章，查找不同阶段的技术探索与学习记录。',
     'Archives',
-    "Browse Yu's published articles by year and revisit technical notes and projects."
+    'Browse Joye’s published articles by year and revisit technical explorations and learning records.'
   ]
 }
 
@@ -64,13 +70,15 @@ export function sectionMetadata(pathname: string) {
 }
 
 export function listingMetadata(
-  kind: 'blog' | 'notes',
+  kind: 'blog' | 'notes' | 'lab',
   en: boolean,
   page: number,
   titles: string[],
   tag?: string | number
 ) {
-  const name = en ? { blog: 'Blog', notes: 'Notes' }[kind] : { blog: '博客', notes: '笔记' }[kind]
+  const name = en
+    ? { blog: 'Blog', notes: 'Notes', lab: 'Lab' }[kind]
+    : { blog: '博客', notes: '笔记', lab: '实验室' }[kind]
   const subject = tag ? (en ? `${name} tagged “${tag}”` : `${name} · ${tag} 标签`) : name
   const suffix = en ? `Page ${page}` : `第 ${page} 页`
   const examples = titles.slice(0, 3).join(en ? '; ' : '；')

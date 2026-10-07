@@ -3,13 +3,10 @@
 The build hook reads emitted HTML after Astro has finished prerendering, replaces
 `sitemap.xml` and `sitemap-0.xml`, and emits an IndexNow manifest. It sends no network
 notifications. The existing `sitemap-index.xml` continues to point to sitemap-0.
-Only HTML with a self canonical on the configured site origin and no `noindex` is
+Only HTML with a self canonical on `https://www.joyehuang.me` and no `noindex` is
 included. API, OG and internal endpoints are excluded. Tags and paginated lists
 remain indexable; every page keeps its own canonical. Sitemap alternates come
 from real HTML hreflang links, never inferred tag translations.
-
-The origin uses `SITE_URL` when set, otherwise Vercel's production domain, then
-the current Vercel deployment URL. Local builds fall back to `http://localhost:4321`.
 
 Seven existing content routes (Contact, Projects, Links in both languages, and
 Chinese tags) now prerender. Their content and layout are unchanged. About remains

@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { validKey } from './build.mjs'
 import { origin } from './html.mjs'
 
-export function eligible(event, repository = 'yftx293/blog') {
+export function eligible(event, repository = 'joyehuang/blog') {
   const d = event.deployment,
     s = event.deployment_status
   return (
@@ -112,7 +112,7 @@ export async function run(env = process.env, fetcher = fetch) {
   const api = async (path, options = {}, allow404 = false) => {
     let r
     try {
-      r = await fetcher(`https://api.github.com/repos/yftx293/blog/${path}`, {
+      r = await fetcher(`https://api.github.com/repos/joyehuang/blog/${path}`, {
         ...options,
         headers: {
           Authorization: `Bearer ${env.GITHUB_TOKEN}`,

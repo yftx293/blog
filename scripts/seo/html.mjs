@@ -2,9 +2,7 @@ import { createHash } from 'node:crypto'
 import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-import { origin } from './site.mjs'
-
-export { origin }
+export const origin = 'https://www.joyehuang.me'
 export const hash = (text) => createHash('sha256').update(text).digest('hex')
 export const decode = (s = '') =>
   s
@@ -85,9 +83,7 @@ export async function readPages(dir, prefix = '') {
     const name = join(prefix, entry.name)
     if (entry.isDirectory()) pages.push(...(await readPages(dir, name)))
     else if (entry.name.endsWith('.html')) {
-      const portableName = name.replaceAll('\\', '/')
-      const path =
-        portableName === '404.html' ? '/404' : '/' + portableName.replace(/(?:\/)?index\.html$/, '')
+      const path = name === '404.html' ? '/404' : '/' + name.replace(/(?:\/)?index\.html$/, '')
       pages.push(parseHtml(await readFile(join(dir, name), 'utf8'), path))
     }
   }

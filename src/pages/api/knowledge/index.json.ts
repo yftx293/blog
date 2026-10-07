@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro'
 
 import { buildSiteFs } from '@/components/terminal/fs/server'
 
+const SITE_URL = 'https://joyehuang.me'
+
 export const GET: APIRoute = async () => {
   const tree = await buildSiteFs()
 
@@ -9,8 +11,8 @@ export const GET: APIRoute = async () => {
     JSON.stringify(
       {
         version: '0.1',
-        site: import.meta.env.SITE,
-        description: "Agent-facing knowledge index for Yu's blog.",
+        site: SITE_URL,
+        description: 'Agent-facing knowledge index for Joye Huang personal site.',
         generated_at: new Date().toISOString(),
         sync: {
           strategy:

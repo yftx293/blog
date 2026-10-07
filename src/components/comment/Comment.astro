@@ -22,11 +22,11 @@ const lang = walineLangs[getLangFromUrl(Astro.url)]
 
 {
   config.integ.waline.enable && (
-    <blog-comment data-path={path ?? ''} data-lang={lang}>
+    <joye-comment data-path={path ?? ''} data-lang={lang}>
       <div id='waline' class={cn('not-prose', className)}>
         Comment seems to stuck. Try to refresh?✨
       </div>
-    </blog-comment>
+    </joye-comment>
   )
 }
 
@@ -38,7 +38,7 @@ const lang = walineLangs[getLangFromUrl(Astro.url)]
 
   const walineConfig = config.integ.waline
 
-  class BlogComment extends HTMLElement {
+  class JoyeComment extends HTMLElement {
     constructor() {
       super()
     }
@@ -72,8 +72,8 @@ const lang = walineLangs[getLangFromUrl(Astro.url)]
     }
   }
 
-  if (walineConfig.enable && !customElements.get('blog-comment')) {
-    customElements.define('blog-comment', BlogComment)
+  if (walineConfig.enable && !customElements.get('joye-comment')) {
+    customElements.define('joye-comment', JoyeComment)
   }
 </script>
 

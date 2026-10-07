@@ -10,8 +10,8 @@ import rehypeKatex from 'rehype-katex'
 import remarkCjkFriendly from 'remark-cjk-friendly'
 import remarkMath from 'remark-math'
 
+import { VENDOR as JOJO_VENDOR, prepareJojoWeb } from './scripts/jojo/jojo-web.mjs'
 import { buildSeo } from './scripts/seo/build.mjs'
-import { origin as siteOrigin } from './scripts/seo/site.mjs'
 import { sectionMetadata } from './src/lib/seo/metadata'
 // Others
 // import { visualizer } from 'rollup-plugin-visualizer'
@@ -34,7 +34,8 @@ import config from './src/site.config.ts'
 const excludedSitemapPathPatterns = [
   /^\/(?:en\/)?404\/?$/,
   /^\/(?:en\/)?search\/?$/,
-  /^\/api(?:\/|$)/
+  /^\/api(?:\/|$)/,
+  /^\/\.well-known\/joye-manifest\.json$/
 ]
 
 const shouldIncludeInSitemap = (page: string) => {
@@ -55,9 +56,9 @@ const exposeSingleSitemap = (): AstroIntegration => ({
           ...sectionMetadata(path),
           noindex: false,
           alternates: [
-            { lang: 'zh-CN', url: `${siteOrigin}/about` },
-            { lang: 'en', url: `${siteOrigin}/en/about` },
-            { lang: 'x-default', url: `${siteOrigin}/about` }
+            { lang: 'zh-CN', url: 'https://www.joyehuang.me/about' },
+            { lang: 'en', url: 'https://www.joyehuang.me/en/about' },
+            { lang: 'x-default', url: 'https://www.joyehuang.me/about' }
           ],
           sources: [
             `src/pages${path}/index.astro`,
@@ -84,12 +85,40 @@ const bilingualReadingTime = (): AstroIntegration => ({
   }
 })
 
+// Jojo (private character package). Absent package or PUBLIC_JOJO=0 → the site
+// builds exactly as before (old intro + ASCII mascot); see docs/jojo.md.
+const jojoWeb = await prepareJojoWeb()
+const JOJO = jojoWeb.available && process.env.PUBLIC_JOJO !== '0'
+const JOJO_REVIEW = JOJO && process.env.PUBLIC_JOJO_REVIEW === '1'
+console.log(
+  `[jojo] ${JOJO ? `on (@joyehuang/jojo-web ${jojoWeb.version}, ${jojoWeb.source})` : `off (${jojoWeb.source})`}${JOJO_REVIEW ? ' + review tools' : ''}`
+)
+const jojoAlias = (entry: 'runtime' | 'static') =>
+  JOJO
+    ? `${JOJO_VENDOR}/${entry}.js`
+    : fileURLToPath(
+        new URL(
+          `./src/lib/jojo/fallback/${entry === 'runtime' ? 'runtime.tsx' : 'static.ts'}`,
+          import.meta.url
+        )
+      )
+
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: siteOrigin,
+  site: 'https://www.joyehuang.me',
   // base: '/docs',
   trailingSlash: 'never',
+
+  // /archive/* was renamed to /notes/* in July 2026 (#60); old URLs are still
+  // indexed and linked, so send them (and their link equity) to the new home.
+  redirects: {
+    '/archive': '/notes',
+    '/archive/0426-openharness-phase1-architecture-notes': '/blog/20260410---openharnessphase1/post',
+    '/archive/[...id]': '/notes/[...id]',
+    '/en/archive': '/en/notes',
+    '/en/archive/[...id]': '/en/notes/[...id]'
+  },
 
   // Adapter
   // https://docs.astro.build/en/guides/deploy/
@@ -164,7 +193,9 @@ export default defineConfig({
   },
   vite: {
     define: {
-      'import.meta.env.DRAFT_PREVIEW': JSON.stringify(process.env.VERCEL_ENV === 'preview')
+      'import.meta.env.DRAFT_PREVIEW': JSON.stringify(process.env.VERCEL_ENV === 'preview'),
+      __JOJO__: JSON.stringify(JOJO),
+      __JOJO_REVIEW__: JSON.stringify(JOJO_REVIEW)
     },
     plugins: [
       //   visualizer({
@@ -174,7 +205,10 @@ export default defineConfig({
     ],
     resolve: {
       dedupe: ['react', 'react-dom'],
-      alias: {}
+      alias: {
+        '@jojo-web/runtime': jojoAlias('runtime'),
+        '@jojo-web/static': jojoAlias('static')
+      }
     },
     ssr: {
       external: ['@resvg/resvg-js'],
@@ -182,6 +216,8 @@ export default defineConfig({
     },
     optimizeDeps: {
       include: [
+        // Jojo's vendor runtime and intro import these; pre-bundle them so a late
+        // discovery never re-optimizes into a second React copy in dev
         'react',
         'react/jsx-runtime',
         'react-dom/client',
