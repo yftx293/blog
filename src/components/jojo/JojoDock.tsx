@@ -44,7 +44,7 @@ const COPY = {
   zh: {
     open: '打开 Jojo 小菜单',
     close: '收起 Jojo 小菜单',
-    tagline: 'Joye 的小伙伴，在这儿陪你逛。',
+    tagline: 'Yu 的小伙伴，在这儿陪你逛。',
     nav: 'Jojo 带路',
     latest: '最新一篇',
     random: '随便翻一篇',
@@ -61,7 +61,7 @@ const COPY = {
   en: {
     open: 'Open the Jojo menu',
     close: 'Close the Jojo menu',
-    tagline: "Joye's little companion, keeping you company.",
+    tagline: "Yu's little companion, keeping you company.",
     nav: 'Jojo shortcuts',
     latest: 'Latest post',
     random: 'Surprise me',

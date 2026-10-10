@@ -1,10 +1,16 @@
 ---
-export const prerender = true
 import PageLayout from '@/layouts/CommonPage.astro'
 import GitHubContributions from '@/components/projects/GitHubContributions.astro'
+import ProjectReferences from '@/components/projects/ProjectReferences.astro'
 import ProjectSection from '@/components/projects/ProjectSection.astro'
 
-const headings = [{ depth: 2, slug: 'projects', text: 'Projects' }]
+export const prerender = true
+
+const headings = [
+  { depth: 2, slug: 'projects', text: 'Projects' },
+  { depth: 2, slug: 'learnings', text: 'Learnings' },
+  { depth: 2, slug: 'theme', text: 'Theme' }
+]
 ---
 
 <PageLayout title='Projects' {headings} info={{ slug: '/projects', hideComment: true }}>
@@ -50,4 +56,5 @@ const headings = [{ depth: 2, slug: 'projects', text: 'Projects' }]
       }
     ]}
   />
+  <ProjectReferences />
 </PageLayout>

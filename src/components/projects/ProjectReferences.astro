@@ -1,0 +1,37 @@
+---
+import ProjectSection from '@/components/projects/ProjectSection.astro'
+---
+
+<h2 id='learnings'>Learnings</h2>
+<ProjectSection
+  class='my-2'
+  analyticsSection='learnings'
+  project={[
+    {
+      id: 'ucb_cs61a',
+      name: 'UCB CS61A',
+      description: 'A programming course reference for learning computer science.',
+      links: [{ type: 'github', href: 'https://cs61a.org/' }]
+    }
+  ]}
+/>
+
+<h2 id='theme'>Theme</h2>
+<ProjectSection
+  analyticsSection='theme'
+  project={[
+    {
+      id: 'astro_theme_pure',
+      name: '🍭 Astro-theme-pure',
+      description: 'A simple, clean but powerful blog theme built with Astro.',
+      links: [
+        { type: 'github', href: 'https://github.com/cworld1/astro-theme-pure' },
+        { type: 'site', href: 'https://github.com/cworld1/astro-theme-pure' },
+        {
+          type: 'doc',
+          href: 'https://github.com/cworld1/astro-theme-pure/blob/main/src/content/blog/customize/index.md'
+        }
+      ]
+    }
+  ]}
+/>

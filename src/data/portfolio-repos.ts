@@ -1,100 +1,74 @@
 export type PortfolioLocale = 'zh' | 'en'
-type PortfolioRepoId =
-  | 'joyehuang/Learn-Open-Harness'
-  | 'joyehuang/minimind-notes'
-  | 'Javis603/token-monitor'
 
-type SharedRepo = {
-  name: string
-  fullName: PortfolioRepoId
-  href: string
-  fallbackStars: number
-  image?: string
-}
-
-type LocalizedRepoCopy = {
-  eyebrow: string
-  description: string
-  imageAlt?: string
-}
-
-const repositories: SharedRepo[] = [
+const repositories = [
   {
-    name: 'Learn-Open-Harness',
-    fullName: 'joyehuang/Learn-Open-Harness',
-    href: 'https://github.com/joyehuang/Learn-Open-Harness',
-    fallbackStars: 297
+    name: 'tinycode',
+    fullName: 'yftx293/tinycode',
+    href: 'https://github.com/yftx293/tinycode',
+    zh: {
+      eyebrow: '轻量级 TypeScript Coding Agent',
+      description: '基于 Pi Agent Core，探索 CLI、权限、会话、Context、Skills、MCP 与只读子 Agent。'
+    },
+    en: {
+      eyebrow: 'A lightweight TypeScript coding agent',
+      description:
+        'Built on Pi Agent Core to explore CLI, permissions, sessions, context, skills, MCP, and read-only sub-agents.'
+    }
   },
   {
-    name: 'minimind-notes',
-    fullName: 'joyehuang/minimind-notes',
-    href: 'https://github.com/joyehuang/minimind-notes',
-    fallbackStars: 93
+    name: 'enterprise-customer-service-agentic-rag',
+    fullName: 'yftx293/enterprise-customer-service-agentic-rag',
+    href: 'https://github.com/yftx293/enterprise-customer-service-agentic-rag',
+    zh: {
+      eyebrow: '企业客服 Agentic RAG',
+      description:
+        '探索 RAG、对话、工单、知识库以及 trace / observability 如何组成可追踪的工程流程。'
+    },
+    en: {
+      eyebrow: 'Enterprise customer-service Agentic RAG',
+      description:
+        'Explores how RAG, conversations, tickets, knowledge bases, and trace / observability form a traceable engineering workflow.'
+    }
   },
   {
-    name: 'Token Monitor',
-    fullName: 'Javis603/token-monitor',
-    href: 'https://github.com/Javis603/token-monitor',
-    fallbackStars: 628,
-    image: '/images/open-source/token-monitor-dashboard.png'
+    name: 'qiniu-xengineer-ai-pr-review',
+    fullName: 'yftx293/qiniu-xengineer-ai-pr-review',
+    href: 'https://github.com/yftx293/qiniu-xengineer-ai-pr-review',
+    zh: {
+      eyebrow: 'AI PR Review',
+      description: '探索 GitHub PR 获取、diff 风险分析、AI review 与展示流程如何衔接。'
+    },
+    en: {
+      eyebrow: 'AI PR review',
+      description:
+        'Explores the workflow from GitHub PR retrieval and diff risk analysis to AI review and presentation.'
+    }
   }
 ]
 
-const localizedCopy: Record<PortfolioLocale, Record<PortfolioRepoId, LocalizedRepoCopy>> = {
-  zh: {
-    'joyehuang/Learn-Open-Harness': {
-      eyebrow: '独立项目 · Agent Harness',
-      description: '从零构建 Agent Harness：循环、工具、记忆与多智能体协作。'
-    },
-    'joyehuang/minimind-notes': {
-      eyebrow: '独立项目 · LLM from scratch',
-      description: '从 Transformer 到 SFT，用实验把小语言模型重新造一遍。'
-    },
-    'Javis603/token-monitor': {
-      eyebrow: '上游贡献 · 3 merged / 1 open',
-      description: '参与活动热力图、跨设备状态同步、限额窗口与大数 Token 展示的产品和工程改进。',
-      imageAlt: 'Token Monitor 使用量 Dashboard，展示 Token 活跃度、模型和工具分布'
-    }
-  },
-  en: {
-    'joyehuang/Learn-Open-Harness': {
-      eyebrow: 'Original project · Agent Harness',
-      description:
-        'Build an agent harness from first principles: loops, tools, memory, and multi-agent work.'
-    },
-    'joyehuang/minimind-notes': {
-      eyebrow: 'Original project · LLM from scratch',
-      description:
-        'Rebuild a small language model from Transformer through SFT, one experiment at a time.'
-    },
-    'Javis603/token-monitor': {
-      eyebrow: 'Upstream contributor · 3 merged / 1 open',
-      description:
-        'Contributed activity heatmaps, fresh provider sync, accurate reset windows, and compact token totals.',
-      imageAlt: 'Token Monitor usage dashboard with activity, model, and tool breakdowns'
-    }
-  }
-}
-
 export async function getPortfolioRepos(locale: PortfolioLocale) {
   return Promise.all(
-    repositories.map(async (repo) => {
-      const copy = localizedCopy[locale][repo.fullName]
-      let stars = repo.fallbackStars
-
+    repositories.map(async ({ zh, en, ...repo }) => {
+      let stars: number | null = null
       try {
         const response = await fetch(`https://api.github.com/repos/${repo.fullName}`, {
-          headers: { Accept: 'application/vnd.github+json' }
+          headers: { Accept: 'application/vnd.github+json' },
+          signal: AbortSignal.timeout(5000)
         })
         if (response.ok) {
           const data = (await response.json()) as { stargazers_count?: number }
-          stars = data.stargazers_count ?? stars
+          if (
+            typeof data.stargazers_count === 'number' &&
+            Number.isInteger(data.stargazers_count) &&
+            data.stargazers_count >= 0
+          ) {
+            stars = data.stargazers_count
+          }
         }
       } catch {
-        // Build and preview should remain deterministic when GitHub is unavailable.
+        // An unavailable count is unknown, not zero or an inherited owner's count.
       }
-
-      return { ...repo, ...copy, stars }
+      return { ...repo, ...(locale === 'en' ? en : zh), stars }
     })
   )
 }

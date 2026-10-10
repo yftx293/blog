@@ -1,14 +1,18 @@
 ---
-export const prerender = true
+import links from 'public/links.json'
 
 import PageLayout from '@/layouts/CommonPage.astro'
+import FriendConstellation from '@/components/links/FriendConstellation.astro'
 
-const headings = [{ depth: 2, slug: 'friends', text: '朋友与链接' }]
+export const prerender = true
+
+const headings = [{ depth: 2, slug: 'websites', text: '网站与链接' }]
 ---
 
 <PageLayout title='Links' {headings} info='/links'>
-  <p>这里以后会放朋友的个人网站、长期关注的项目或值得反复访问的地方。</p>
-
-  <h2 id='friends'>朋友与链接</h2>
-  <p>暂时还没有收录内容。</p>
+  <p>
+    个人网站、项目，以及值得反复访问的地方。保留已有网站目录，但不表示我与这些作者有私人关系或互换友链。
+  </p>
+  <h2 id='websites'>网站与链接</h2>
+  <FriendConstellation list={links.friends[0]} meLabel='Yu' />
 </PageLayout>

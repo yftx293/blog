@@ -55,7 +55,10 @@ const siteGraph = {
       '@type': 'Person',
       '@id': `${origin}/#person`,
       name: config.author,
-      description: '信息与计算科学本科生，关注 AI Agent、Coding Agent、LLM 应用与工程实践。',
+      description:
+        lang === 'en'
+          ? 'AI Agent & Full-Stack Developer. Information and Computing Science undergraduate exploring AI agents, coding agents, LLM applications, and engineering systems.'
+          : 'AI Agent & Full-Stack Developer。信息与计算科学本科生，关注 AI Agent、Coding Agent、LLM 应用与工程系统。',
       url: `${origin}/`,
       image: `${origin}/favicon/apple-touch-icon.png`,
       sameAs: ['https://github.com/yftx293']

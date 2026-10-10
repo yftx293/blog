@@ -1,0 +1,29 @@
+---
+import { getPortfolioRepos } from '@/data/portfolio-repos'
+
+import LinkCard from '@/components/home/LinkCard.astro'
+import Section from '@/components/home/Section.astro'
+
+interface Props {
+  lang: 'zh' | 'en'
+}
+const { lang } = Astro.props
+const repos = await getPortfolioRepos(lang)
+---
+
+<Section title={lang === 'en' ? 'Projects' : '项目'}>
+  {
+    repos.map((repo) => (
+      <LinkCard
+        heading={repo.name}
+        subheading={repo.description}
+        date={`⭐ ${repo.stars ?? '—'}`}
+        href={repo.href}
+        data-analytics-event='github_link_click'
+        data-analytics-surface='home_open_source'
+        data-analytics-target='repo'
+        data-analytics-repo={repo.name}
+      />
+    ))
+  }
+</Section>

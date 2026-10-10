@@ -341,7 +341,7 @@ class V3Session extends HTMLElement {
       notes: `${prefix}/notes`,
       about: `${prefix}/about`,
       contact: `${prefix}/contact`,
-      github: 'https://github.com/joyehuang'
+      github: 'https://github.com/yftx293'
     }
     if (!isEn) routes.talks = '/talks'
 

@@ -1,9 +1,10 @@
 ---
+import { activity } from '@/data/agent-teams'
+
 import { Button } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
-import Comment from '@/components/comment/Comment.astro'
 import AgentTeamsBoard from '@/components/agent-teams/AgentTeamsBoard.astro'
-import { activity } from '@/data/agent-teams'
+import Comment from '@/components/comment/Comment.astro'
 
 // 静态壳：队伍卡与表单结构预渲染，实时名单由客户端拉 /api/agent-teams 填充。
 export const prerender = true
@@ -11,8 +12,8 @@ export const prerender = true
 
 <PageLayout
   meta={{
-    title: `${activity.name} · ${activity.title} · 延期至 9 月 30 日`,
-    description: '比赛延期至2026年9月30日23:59（北京时间）。加入QQ群831907794，@bot发送「我要报名SOA owner/repo」，以返回报名编号为准。旧网站组队已截止，历史名单保留。'
+    title: `${activity.name} · ${activity.title}`,
+    description: 'Agent 工程实践方向与组队看板，保留技术主题和交互能力，不提供旧社群报名入口。'
   }}
   highlightColor='#5B8DB8'
 >

@@ -1,15 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { formatDate } from '@/i18n/date'
+import { getLangFromUrl } from '@/i18n/ui'
 import config from 'virtual:config'
 
 import { QRCode } from 'astro-pure/advanced'
 import { Icon } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
 
-// English mirror of astro-pure's Copyright: identical markup/styles, but the
-// publish date formats in en-US instead of the site-wide zh-CN date locale
-// (astro-pure's `getFormattedDate` reads a single global `locale.dateLocale`).
+// Shared bilingual copyright card: retain the theme's sharing and QR interactions.
 interface Props {
   data: CollectionEntry<'blog' | 'blogEn'>['data']
   class?: string
@@ -20,6 +19,9 @@ const {
   class: className
 } = Astro.props
 
+const lang = getLangFromUrl(Astro.url)
+const en = lang === 'en'
+
 const image = typeof heroImage?.src === 'string' ? heroImage?.src : (heroImage?.src?.src ?? '')
 
 const shares = {
@@ -27,7 +29,7 @@ const shares = {
     link: `http://service.weibo.com/share/share.php?url=${Astro.url}&title=${title}&pic=${image}`
   },
   x: {
-    link: `https://x.com/intent/tweet?text='${title}'&url='${Astro.url}'&via='${config.author}'`
+    link: `https://x.com/intent/tweet?text='${title}'&url='${Astro.url}'`
   },
   bluesky: {
     link: `https://bsky.app/intent/compose?text=${title}%0A${Astro.url}`
@@ -52,21 +54,21 @@ const shares = {
   {/* common info */}
   <div class='flex flex-row flex-wrap justify-start gap-x-5 gap-y-1 sm:gap-x-8'>
     <div class='flex gap-x-2 sm:flex-col'>
-      <span>Author</span>
+      <span>{en ? 'Author' : '作者'}</span>
       <span class='text-sm text-foreground max-sm:place-self-center'>{config.author}</span>
     </div>
     {
       publishDate && (
         <div class='flex gap-x-2 sm:min-w-16 sm:flex-col'>
-          <span>Published at</span>
+          <span>{en ? 'Published at' : '发布于'}</span>
           <span class='text-sm text-foreground max-sm:place-self-center'>
-            {formatDate(publishDate, 'en', { month: 'long' })}
+            {formatDate(publishDate, lang, { month: 'long' })}
           </span>
         </div>
       )
     }
     <div class='flex gap-x-2 sm:flex-col'>
-      <span>Copyright</span>
+      <span>{en ? 'Copyright' : '版权'}</span>
       <a
         class='text-sm text-foreground max-sm:place-self-center'
         href='https://creativecommons.org/licenses/by/4.0/'
@@ -116,12 +118,12 @@ const shares = {
 
 <div class='mx-6 rounded-b-xl border border-t-0 px-3 pb-1.5 pt-1 sm:mx-8 sm:px-4'>
   <a
-    href='/en/projects#sponsorship'
+    href='https://github.com/yftx293'
     class='flex items-center justify-between text-muted-foreground no-underline'
     target='_blank'
   >
-    <span>Buy me a cup of coffee ☕.</span>
-    <Icon class='box-content size-5 p-1' name='receive-money' />
+    <span>{en ? 'Discuss on GitHub ↗' : '通过 GitHub 交流 ↗'}</span>
+    <Icon class='box-content size-5 p-1' name='github' />
   </a>
 </div>
 
@@ -133,7 +135,9 @@ const shares = {
   copyLink?.addEventListener('click', () => {
     navigator.clipboard.writeText(window.location.href)
     // Show toast
-    showToast({ message: 'Link copied!' })
+    showToast({
+      message: document.documentElement.lang.startsWith('zh') ? '链接已复制' : 'Link copied!'
+    })
   })
 
   // QRCode

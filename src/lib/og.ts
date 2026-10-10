@@ -7,7 +7,7 @@ const avatarBuffer = fs.readFileSync(path.resolve('./src/assets/avatar.png'))
 const avatarDataUrl = `data:image/png;base64,${avatarBuffer.toString('base64')}`
 
 const PRIMARY = '#659EB9'
-const SITE = 'joyehuang.me'
+const SITE = "Yu's Blog"
 const LATIN_CHARS =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,:;!?@#$%&*()[]{}<>/\\|-_=+"\'` ·⭐'
 
@@ -33,7 +33,7 @@ type OgNode = {
 }
 
 async function renderPng(tree: OgNode, textForSubset: string) {
-  const subset = LATIN_CHARS + textForSubset
+  const subset = LATIN_CHARS + SITE + textForSubset
   const fonts: NonNullable<Parameters<typeof satori>[1]['fonts']> = []
 
   const [regular, bold] = await Promise.all([
@@ -165,9 +165,9 @@ export async function defaultOgPng(opts: {
         )
       ]
     ),
-    footerLine('Melbourne · Build fast, learn faster')
+    footerLine('Learning, building, and thinking in public')
   ])
-  return renderPng(tree, opts.name + opts.tagline + 'Melbourne · Build fast, learn faster')
+  return renderPng(tree, opts.name + opts.tagline + 'Learning, building, and thinking in public')
 }
 
 export async function postOgPng(opts: {

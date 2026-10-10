@@ -1,23 +1,20 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
+import AboutContent from '@/components/about/AboutContent.astro'
 import Comment from '@/components/comment/Comment.astro'
 
 const headings = [
   { depth: 2, slug: 'about-me', text: '关于我' },
   { depth: 2, slug: 'current-focus', text: '当前关注' },
-  { depth: 2, slug: 'about-blog', text: '关于这个博客' }
+  { depth: 2, slug: 'about-blog', text: '关于这个博客' },
+  ...(__JOJO__ ? [{ depth: 2, slug: 'jojo', text: 'Jojo' }] : []),
+  { depth: 2, slug: 'social-networks', text: 'GitHub' },
+  { depth: 2, slug: 'tools', text: '工具与参考' },
+  { depth: 2, slug: 'technical-notes', text: '技术方向' }
 ]
 ---
 
 <PageLayout title='About' {headings} info='/about'>
-  <h2 id='about-me'>关于我</h2>
-  <p>我是一名信息与计算科学本科生。</p>
-
-  <h2 id='current-focus'>当前关注</h2>
-  <p>当前主要关注 AI Agent、Coding Agent、LLM 应用与相关工程系统，也在学习后端与 AI Infra。</p>
-
-  <h2 id='about-blog'>关于这个博客</h2>
-  <p>这里用于记录技术学习、项目实践、源码阅读，以及一些逐渐形成的思考。</p>
-
+  <AboutContent lang='zh' />
   <Comment class='mt-8' path='/about' />
 </PageLayout>

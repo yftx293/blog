@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">AI PR Review — technical overview</title>
+  <desc id="desc">From GitHub PR to an inspectable review. GitHub PR retrieval. Diff risk analysis / AI review. Review presentation. Conceptual illustration, not an application screenshot.</desc>
+  <rect width="1200" height="760" rx="28" fill="#f6f8fc"/>
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace">
+    <text x="68" y="86" font-size="21" fill="#659eb9">YU / PROJECT NOTES</text>
+    <text x="68" y="163" font-size="48" font-weight="600" fill="#182436">AI PR Review</text>
+    <text x="68" y="210" font-size="23" fill="#526579">From GitHub PR to an inspectable review</text>
+    <rect x="68" y="267" width="1064" height="98" rx="16" fill="#ffffff" stroke="#cbd6e4"/><text x="98" y="326" font-size="25" fill="#182436">01 / GitHub PR retrieval</text>
+    <rect x="68" y="392" width="1064" height="98" rx="16" fill="#ffffff" stroke="#cbd6e4"/><text x="98" y="451" font-size="25" fill="#182436">02 / Diff risk analysis / AI review</text>
+    <rect x="68" y="517" width="1064" height="98" rx="16" fill="#ffffff" stroke="#cbd6e4"/><text x="98" y="576" font-size="25" fill="#182436">03 / Review presentation</text>
+    <text x="68" y="709" font-size="18" fill="#526579">CONCEPTUAL OVERVIEW · LEARNING / SYSTEMS / PRACTICE</text>
+  </g>
+</svg>

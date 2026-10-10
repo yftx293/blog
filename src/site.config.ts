@@ -184,7 +184,7 @@ export const integ: IntegrationUserConfig = {
     enable: false,
 
     // 这里暂时保留原字段结构，关闭后不会加载评论。
-    server: 'https://waline.joyehuang.me',
+    server: '',
 
     additionalConfigs: {
       pageview: false,

@@ -13,7 +13,7 @@ type RepoItem = {
   name: string
   fullName: string
   description: string
-  stars: number
+  stars: number | null
   href?: string
   eyebrow?: string
   image?: string
@@ -33,49 +33,50 @@ const { locale, posts, notes, repos, postCount, talkCount } = Astro.props
 const isEn = locale === 'en'
 const prefix = isEn ? '/en' : ''
 
-const ownStars = repos
-  .filter((repo) => repo.fullName.startsWith('joyehuang/'))
-  .reduce((sum, repo) => sum + repo.stars, 0)
+const ownRepos = repos.filter((repo) => repo.fullName.startsWith('yftx293/'))
+const ownStars = ownRepos.every((repo) => repo.stars !== null)
+  ? ownRepos.reduce((sum, repo) => sum + (repo.stars ?? 0), 0)
+  : null
 
 const copy = isEn
   ? {
       session: 'k3 · session #2026-07',
       blog: 'blog',
       contact: 'contact',
-      prompt: 'Tell me about Joye. Skip the résumé — give me the real story.',
-      thoughtContext: `▸ context: joyehuang.me → ${postCount} essays · 4 teams · ${ownStars}★ · 100+ interviews`,
+      prompt: 'Tell me about Yu. Start with the projects and the questions behind them.',
+      thoughtContext: `▸ context: yu.devserver → ${postCount} essays · ${ownRepos.length} projects · ${ownStars ?? '—'}★`,
       role: 'AI Agent & Full-Stack Developer',
-      bio: 'CS undergrad at the University of Melbourne. I care about how LLMs work under the hood — and whether the product actually ships.',
+      bio: 'Information and Computing Science undergraduate. Exploring AI agents, coding agents, LLM applications, and engineering systems; learning backend and AI Infra.',
       motto: 'Build fast, learn faster.',
       photoArtifact: 'artifact · profile.png',
       photoStamp: 'developed ✓',
-      photoCaption: 'Joye · Melbourne · open to intern / full-time roles',
+      photoCaption: 'Yu · learning, building, and thinking in public',
       thoughtNumbers: '▸ run: numbers.scan() → 5 rows',
       readoutArtifact: 'artifact · query result',
       stats: [
-        ['agent-role interviews, debriefed', 'every lesson published, not hoarded'],
-        ['AI teams, hands-on', 'Adastra Labs · Tezign · AIXCut · fAIshion'],
-        ['stars on original repos', 'Learn-Open-Harness · minimind-notes'],
-        ['bilingual long-form essays', 'every essay ships in zh + en'],
-        ['community talks hosted', 'Summer of Agents · fan-group sessions']
+        ['engineering directions', 'Coding Agent · Agentic RAG · AI PR Review'],
+        ['public projects', 'tinycode · customer service · PR review'],
+        ['GitHub stars', 'live count; unavailable counts remain unknown'],
+        ['published essays', 'technical learning and source-code reading'],
+        ['recorded technical talks', 'a space for engineering discussions']
       ],
       commentary:
-        'Side note — after those 100+ interviews, his takeaway: an interview is not an exam, it’s a two-way street.',
+        'This blog records technical learning, project practice, source-code reading, and thoughts as they take shape.',
       thoughtWork: '▸ fetch: selected work → 6 artifacts',
       generated: 'generated ✓',
       thoughtWriting: '▸ list: writing → essays & notes',
       writingArtifact: 'artifact · index',
       quote: ['Knowledge is the foundation;', 'context', ' is the moat.'],
-      quoteCite: '—— Joye, Talk Ep.2',
+      quoteCite: '— Agent engineering notes',
       handoffLines: [
         'That’s the story.',
-        'He also says: “Don’t chase every buzzword — build a system that keeps running.” I agree.',
+        'Keep the engineering questions visible: context, tools, reliability, and systems that keep running.',
         'The session is yours now:'
       ],
       inputPlaceholder: "try 'blog', 'notes', 'about', 'contact' or 'github' …",
       inputAria: 'Type a command to navigate',
       credit: 'designed & built with kimi k3',
-      copyright: '© 2026 Joye · Melbourne',
+      copyright: '© 2026 Yu',
       backTop: '↑ scroll back to replay the session',
       cue: 'scroll — the session continues'
     }
@@ -83,46 +84,46 @@ const copy = isEn
       session: 'k3 · session #2026-07',
       blog: '博客',
       contact: '联系',
-      prompt: '介绍一下 joye。别念简历，讲点真的。',
-      thoughtContext: `▸ context: joyehuang.me → ${postCount} essays · 4 teams · ${ownStars}★ · 100+ interviews`,
+      prompt: '介绍一下 Yu。从项目和正在探索的问题开始。',
+      thoughtContext: `▸ context: yu.devserver → ${postCount} essays · ${ownRepos.length} projects · ${ownStars ?? '—'}★`,
       role: 'AI Agent & Full-Stack Developer',
-      bio: '墨尔本大学在读。在意 LLM 的底层机制，也在意产品能不能真正跑起来。',
+      bio: '信息与计算科学本科生。关注 AI Agent、Coding Agent、LLM 应用与工程系统，同时学习后端与 AI Infra。',
       motto: 'Build fast, learn faster.',
       photoArtifact: 'artifact · profile.png',
       photoStamp: 'developed ✓',
-      photoCaption: 'Joye · 墨尔本 · 开放实习/全职机会',
+      photoCaption: 'Yu · 记录学习、构建与思考',
       thoughtNumbers: '▸ run: numbers.scan() → 5 rows',
       readoutArtifact: 'artifact · query result',
       stats: [
-        ['场 Agent 岗位面试复盘', '经验全部公开，不私藏'],
-        ['段 AI 团队实战', 'Adastra Labs · Tezign · AIXCut · fAIshion'],
-        ['独立开源项目 Stars', 'Learn-Open-Harness · minimind-notes'],
-        ['篇双语长文', '每篇都有中英两个版本'],
-        ['场社区分享会', 'Summer of Agents · 粉丝群分享']
+        ['个工程方向', 'Coding Agent · Agentic RAG · AI PR Review'],
+        ['个公开项目', 'tinycode · 企业客服 · PR Review'],
+        ['GitHub Stars', '实时获取；不可用时保持未知'],
+        ['篇已发布文章', '技术学习与源码阅读'],
+        ['期技术分享记录', '保留工程讨论的空间']
       ],
-      commentary: '补一句：面了 100+ 家之后，他的结论是——面试不是考试，是双向选择。',
+      commentary: '这里记录技术学习、项目实践、源码阅读，以及逐渐形成的思考。',
       thoughtWork: '▸ fetch: selected work → 6 artifacts',
       generated: 'generated ✓',
       thoughtWriting: '▸ list: writing → essays & notes',
       writingArtifact: 'artifact · index',
       quote: ['知识是地基，', 'context', ' 才是护城河。'],
-      quoteCite: '—— Joye · 分享会 Ep.2',
+      quoteCite: '—— Agent 工程札记',
       handoffLines: [
         '故事讲完了。',
-        '他还说过：「与其追每个名词，不如建一个能持续跑下去的系统。」——我同意。',
+        '把工程问题留在眼前：Context、工具、可靠性，以及能持续运行的系统。',
         '会话交给你：'
       ],
       inputPlaceholder: "试试 'blog'、'notes'、'about'、'contact' 或 'github' …",
       inputAria: '输入命令跳转',
       credit: 'designed & built with kimi k3',
-      copyright: '© 2026 Joye · 墨尔本',
+      copyright: '© 2026 Yu',
       backTop: '↑ 回到顶部重播会话',
       cue: 'scroll — 会话继续'
     }
 
 const statsData = [
-  { value: 100, suffix: '+' },
-  { value: 4, suffix: '' },
+  { value: 3, suffix: '' },
+  { value: ownRepos.length, suffix: '' },
   { value: ownStars, suffix: '★' },
   { value: postCount, suffix: '' },
   { value: talkCount, suffix: '' }
@@ -143,103 +144,36 @@ type Product = {
 type Repo = { kind: 'repo'; key: string; repo: RepoItem }
 type Artifact = Product | Repo
 
-const products: Product[] = isEn
-  ? [
-      {
-        kind: 'product',
-        key: 'playyy',
-        title: 'Playyy',
-        eyebrow: 'Adastra Labs',
-        description:
-          'A brand-aware AI image workspace — brand context, generation, and iteration in one surface.',
-        href: 'https://playyy.ai/',
-        domain: 'playyy.ai',
-        image: '/images/landing/playyy-ui.png',
-        alt: 'Playyy product interface'
-      },
-      {
-        kind: 'product',
-        key: 'atypica',
-        title: 'atypica',
-        eyebrow: 'Tezign AIGC',
-        description:
-          'A commercial-research multi-agent system: clarification, persona interviews, layered memory, async tools.',
-        href: 'https://atypica.ai/',
-        domain: 'atypica.ai',
-        image: '/images/landing/atypica-site.png',
-        alt: 'atypica research agent product page'
-      },
-      {
-        kind: 'product',
-        key: 'aixcut',
-        title: 'AIXCut',
-        eyebrow: 'AIXCut',
-        description:
-          'Agent-assisted video editing: script shaping, footage organisation, and a deliverable cut workflow.',
-        href: 'https://aixcut.cn/',
-        domain: 'aixcut.cn',
-        image: '/images/landing/aixcut-site.png',
-        alt: 'AIXCut video editing product page'
-      }
-    ]
-  : [
-      {
-        kind: 'product',
-        key: 'playyy',
-        title: 'Playyy',
-        eyebrow: 'Adastra Labs',
-        description: '品牌感知的 AI 图像工作台——品牌上下文、生成与迭代在同一个创作界面。',
-        href: 'https://playyy.ai/',
-        domain: 'playyy.ai',
-        image: '/images/landing/playyy-ui.png',
-        alt: 'Playyy 产品界面'
-      },
-      {
-        kind: 'product',
-        key: 'atypica',
-        title: 'atypica',
-        eyebrow: 'Tezign AIGC',
-        description: '商业研究 Multi-Agent：澄清式反问、Persona 访谈、分层记忆与异步工具调用。',
-        href: 'https://atypica.ai/',
-        domain: 'atypica.ai',
-        image: '/images/landing/atypica-site.png',
-        alt: 'atypica 研究 Agent 产品页'
-      },
-      {
-        kind: 'product',
-        key: 'aixcut',
-        title: 'AIXCut',
-        eyebrow: 'AIXCut',
-        description: 'Agent 辅助视频剪辑：脚本塑形、素材组织到可交付成片的工作流。',
-        href: 'https://aixcut.cn/',
-        domain: 'aixcut.cn',
-        image: '/images/landing/aixcut-site.png',
-        alt: 'AIXCut 视频剪辑产品页'
-      }
-    ]
+const products: Product[] = repos.map((repo, index) => ({
+  kind: 'product',
+  key: `project-${index}`,
+  title: repo.name,
+  eyebrow: repo.eyebrow ?? (isEn ? 'Project practice' : '项目实践'),
+  description: repo.description,
+  href: repo.href ?? `https://github.com/${repo.fullName}`,
+  domain: 'github.com/yftx293',
+  image: `/images/projects/${repo.name}.svg`,
+  alt: `${repo.name} — technical overview`
+}))
 
-const artifacts: Artifact[] = [
-  { kind: 'repo', key: 'learn-open-harness', repo: repos[0] },
-  products[0],
-  { kind: 'repo', key: 'minimind-notes', repo: repos[1] },
-  products[1],
-  { kind: 'repo', key: 'token-monitor', repo: repos[2] },
-  products[2]
-]
+const artifacts: Artifact[] = repos.flatMap((repo, index) => [
+  { kind: 'repo' as const, key: repo.name, repo },
+  products[index]
+])
 
 const chips = [
   { label: '/blog', href: `${prefix}/blog` },
   { label: '/notes', href: `${prefix}/notes` },
   { label: '/about', href: `${prefix}/about` },
   { label: '/contact', href: `${prefix}/contact` },
-  { label: '/github', href: 'https://github.com/joyehuang' }
+  { label: '/github', href: 'https://github.com/yftx293' }
 ]
 ---
 
 <v3-home class='session' id='top' data-locale={locale}>
   <header class='session__bar'>
     <span class='session__id'><i aria-hidden='true'></i>{copy.session}</span>
-    <span class='session__url' aria-hidden='true'>joyehuang.me/v3</span>
+    <span class='session__url' aria-hidden='true'>yu.devserver/v3</span>
     <nav class='session__links' aria-label={isEn ? 'Quick links' : '快捷链接'}>
       <a href={`${prefix}/blog`}>{copy.blog}</a>
       <a href={`${prefix}/contact`}>{copy.contact}</a>
@@ -270,14 +204,14 @@ const chips = [
     <section class='msg msg--agent' data-block='identity' id='s-identity'>
       <p class='thought' data-thought>{copy.thoughtContext}</p>
       <div class='answer'>
-        <h1 class='answer__word' data-answer-line>Joye<span class='answer__dot'>.</span></h1>
+        <h1 class='answer__word' data-answer-line>Yu<span class='answer__dot'>.</span></h1>
         <p class='answer__role' data-answer-line>{copy.role}</p>
         <p class='answer__bio' data-answer-line>{copy.bio}</p>
         <p class='answer__motto' data-answer-line>{copy.motto}</p>
       </div>
       <figure class='artifact artifact--photo' data-photo>
         <div class='artifact__media'>
-          <Image src={avatar} alt={isEn ? 'Portrait of Joye' : 'Joye 的头像'} loading='eager' />
+          <Image src={avatar} alt={isEn ? 'Portrait of Yu' : 'Yu 的头像'} loading='eager' />
         </div>
         <figcaption>
           <span class='artifact__head'>
@@ -285,7 +219,7 @@ const chips = [
             <span class='artifact__stamp' data-artifact-stamp>{copy.photoStamp}</span>
           </span>
           <span class='artifact__caption'>{copy.photoCaption}</span>
-          <span class='artifact__lens'>50mm · f/1.4</span>
+          <span class='artifact__lens'>profile / Yu</span>
         </figcaption>
       </figure>
     </section>
@@ -303,10 +237,10 @@ const chips = [
               <li class='readout__row' data-readout-row>
                 <span
                   class='readout__value'
-                  data-count-to={stat.value}
+                  data-count-to={stat.value ?? undefined}
                   data-count-suffix={stat.suffix}
                 >
-                  {stat.value}
+                  {stat.value ?? '—'}
                   {stat.suffix}
                 </span>
                 <span class='readout__metric'>{stat.label}</span>
@@ -342,7 +276,7 @@ const chips = [
             {item.kind === 'repo' && !item.repo.image ? (
               <span class='artifact__mono' data-artifact-media aria-hidden='true'>
                 <code>$ git clone {item.repo.fullName}</code>
-                <span class='artifact__stars'>★ {item.repo.stars}</span>
+                <span class='artifact__stars'>★ {item.repo.stars ?? '—'}</span>
               </span>
             ) : (
               <span class='artifact__shot' data-artifact-media>
@@ -364,7 +298,9 @@ const chips = [
                 {item.kind === 'repo' ? item.repo.description : item.description}
               </span>
               <span class='artifact__meta'>
-                {item.kind === 'repo' ? `★ ${item.repo.stars} · github ↗` : `${item.domain} ↗`}
+                {item.kind === 'repo'
+                  ? `★ ${item.repo.stars ?? '—'} · github ↗`
+                  : `${item.domain} ↗`}
               </span>
             </span>
           </a>

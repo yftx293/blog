@@ -37,12 +37,12 @@ const takeawayHtml = (title: string, desc?: string) =>
     <p class='tk-kicker'>分享会 · Talks</p>
     <h2 class='tk-intro-title'>一起聊聊</h2>
     <p class='tk-intro-sub'>
-      每周一次的线上分享会，和大家聊聊技术、求职，还有最近在想的那些事。
+      技术分享与讨论记录：Agent、工程实践、学习方法与行业观察。
     </p>
     <div class='tk-hero-foot'>
       <div class='tk-stats'>
         <span>已记录 <b>{publishedCount}</b> 期</span>
-        <span><b>每周</b> 一次</span>
+        <span><b>持续</b> 积累</span>
         <span>自 <b>{sinceLabel}</b></span>
         <span>浏览 <b class='waline-pageview-count' data-path='/talks'></b> 次</span>
         <a class='tk-stat-link' href='#waline'>
@@ -55,7 +55,7 @@ const takeawayHtml = (title: string, desc?: string) =>
         data-analytics-event='talk_join_intent'
         data-analytics-surface='talks_hero'
         data-analytics-target='contact'
-      >想来参加？→</a>
+      >交流想法 →</a>
     </div>
   </section>
 
@@ -100,7 +100,7 @@ const takeawayHtml = (title: string, desc?: string) =>
                 {d.subtitle && <p class='tk-preview-sub'>{d.subtitle}</p>}
                 <div class='tk-preview-foot'>
                   <span class='tk-preview-brand'>
-                    分享人 Joye · joyehuang.me · AI Agent &amp; Full-Stack Dev
+                    Yu · AI Agent &amp; Full-Stack Developer
                   </span>
                   <a
                     class='tk-preview-cta'
@@ -109,7 +109,7 @@ const takeawayHtml = (title: string, desc?: string) =>
                     data-analytics-surface='talks_preview'
                     data-analytics-target='contact'
                   >
-                    想来参加？→
+                    交流想法 →
                   </a>
                 </div>
               </div>
@@ -251,7 +251,7 @@ const takeawayHtml = (title: string, desc?: string) =>
                   {d.slideCount && <span class='tk-cta-note'>共 {d.slideCount} 页 · 方向键翻页</span>}
                 </div>
 
-                <p class='tk-brand'>分享人 Joye · joyehuang.me · AI Agent &amp; Full-Stack Dev</p>
+                <p class='tk-brand'>Yu · AI Agent &amp; Full-Stack Developer</p>
               </div>
             </div>
           </article>
@@ -278,15 +278,15 @@ const takeawayHtml = (title: string, desc?: string) =>
           <span class='tk-upcoming-tag'>下一期 · 待定</span>
           <span class='tk-upcoming-main'>
             <span class='tk-upcoming-title'>第 {latestEpisode + 1} 期 · 主题征集中</span>
-            <span class='tk-upcoming-desc'>每周同一时间，轮到下一位群友分享。想听、想讲都欢迎——</span>
+            <span class='tk-upcoming-desc'>后续在这里记录新的技术分享，欢迎交流选题与实践。</span>
           </span>
-          <span class='tk-upcoming-cta'>想来参加？→</span>
+          <span class='tk-upcoming-cta'>交流想法 →</span>
         </a>
       </article>
     )}
   </div>
 
-  <p class='tk-foot'>每周更新一期 · 往前翻就是第一期</p>
+  <p class='tk-foot'>记录技术分享 · 往前翻就是第一期</p>
 </main>
 
 <style>

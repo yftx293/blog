@@ -22,17 +22,17 @@ export type AgentTeam = {
 export const activity = {
   /** 比赛的英文名 / 品牌名 */
   name: 'Summer of Agents',
-  title: '第一届 Joye 粉丝 Agent 比赛',
-  subtitle: '比赛进行中',
+  title: 'Agent 工程实践',
+  subtitle: '技术方向与组队看板',
   tagline:
-    '入群后 @bot 发送「我要报名SOA owner/repo」（替换为自己的公开 GitHub 仓库），以 bot 返回报名编号为准。旧网站组队已于7月10日截止，原成员无需重复报名；QQ 新报名暂未同步至下方名单。',
+    '保留 Agent 实践方向与组队看板能力，供技术探索参考。此页不是正在举办的个人比赛，也不提供旧社群的报名入口。',
   /** 组队截止日（YYYY-MM-DD，测试会校验格式） */
   legacyTeamDeadline: '2026-07-10',
   competitionClosesAt: '2026-10-01T00:00:00+08:00',
   /** 组队截止时刻（北京时间 7/10 晚 12 点）——过点后 API 与看板同时关闭报名/建队 */
   signupClosesAt: '2026-07-11T00:00:00+08:00',
   /** 活动详情文档（飞书 wiki） */
-  docHref: 'https://my.feishu.cn/wiki/LHJiw36mxietv4kKZjacOIbznhe?from=from_copylink'
+  docHref: 'https://github.com/yftx293'
 }
 
 /** 组队是否已截止——报名 / 建队通道随之关闭（API 与看板共用） */

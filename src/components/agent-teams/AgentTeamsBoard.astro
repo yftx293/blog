@@ -26,7 +26,7 @@ const signupClosed = isSignupClosed()
         <div class='mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground'>
           <span class='inline-flex items-center gap-1.5'>
             <span class='inline-block size-1.5 animate-pulse rounded-full bg-amber-500'></span>
-            比赛延期至9月30日23:59（北京时间）
+            Agent 技术方向与看板存档
           </span>
           <a
             class='inline-flex items-center gap-1 text-foreground underline-offset-4 hover:underline'
@@ -34,7 +34,7 @@ const signupClosed = isSignupClosed()
             target='_blank'
             rel='noopener noreferrer'
           >
-            活动详情 ↗
+            查看项目 ↗
           </a>
           <span class='qq-group-wrap relative inline-flex' data-qq-group-wrap>
             <button
@@ -42,19 +42,19 @@ const signupClosed = isSignupClosed()
               class='inline-flex items-center gap-1.5 rounded-full bg-amber-500 px-3 py-1.5 font-medium text-amber-950 transition-colors hover:bg-amber-400'
               data-analytics-event='soa_registration_intent'
               data-analytics-surface='soa_registration'
-              data-analytics-action='join_group'
-              data-analytics-target='qq_group'
+              data-analytics-action='contact'
+              data-analytics-target='github'
               data-qq-group-toggle
               aria-expanded='false'
             >
-              加入 QQ 群报名 <span aria-hidden='true'>↗</span>
+              通过 GitHub 交流 <span aria-hidden='true'>↗</span>
             </button>
             <span
               class='qq-group-popover absolute left-0 top-full z-20 mt-2 whitespace-nowrap rounded-lg border bg-background px-3 py-2 text-sm shadow-lg'
               data-qq-group-popover
               role='tooltip'
             >
-              QQ 群：<strong class='font-semibold text-foreground'>831907794</strong>
+              GitHub：<a href='https://github.com/yftx293' target='_blank' rel='noopener noreferrer' class='font-semibold text-foreground'>yftx293</a>
             </span>
           </span>
         </div>
@@ -261,7 +261,7 @@ const signupClosed = isSignupClosed()
                 type='text'
                 maxlength='40'
                 autocomplete='off'
-                placeholder='群里公布的口令'
+                placeholder='活动管理口令'
               />
             </label>
 
@@ -303,7 +303,7 @@ const signupClosed = isSignupClosed()
               <div class='manage-dialog-body'>
             <section class='manage-section'>
               <h3 class='manage-section-title'>个人退出</h3>
-              <p class='manage-section-hint'>仅退出你自己的报名，需要 QQ 群口令。</p>
+              <p class='manage-section-hint'>仅退出你自己的报名，需要 活动管理口令。</p>
           <form class='leave-form manage-form' data-leave-form>
             <label class='manage-field'>
               你的 QQ 昵称（要和报名时一致）
@@ -318,7 +318,7 @@ const signupClosed = isSignupClosed()
               />
             </label>
             <label class='manage-field'>
-              QQ 群口令（和报名时一致）
+              活动管理口令（和报名时一致）
               <input
                 class='rounded-lg border bg-background px-2.5 py-1.5 text-sm text-foreground'
                 name='passcode'
@@ -326,7 +326,7 @@ const signupClosed = isSignupClosed()
                 maxlength='40'
                 required
                 autocomplete='off'
-                placeholder='群里公布的口令'
+                placeholder='活动管理口令'
               />
             </label>
             <div class='manage-actions'>
@@ -346,14 +346,14 @@ const signupClosed = isSignupClosed()
               <p class='manage-section-hint'>维护项目资料、转让队长或移除摸鱼队员。</p>
           <form class='detail-form manage-form' data-detail-form>
             <label class='manage-field'>
-              口令（粉丝群的名字）
+              口令（管理口令）
               <input
                 class='rounded-lg border bg-background px-2.5 py-1.5 text-sm text-foreground'
                 name='passcode'
                 type='text'
                 maxlength='40'
                 autocomplete='off'
-                placeholder='粉丝群的名字'
+                placeholder='管理口令'
                 required
               />
             </label>
@@ -526,7 +526,7 @@ const signupClosed = isSignupClosed()
       </div>
 
       <label class='flex flex-col gap-1 text-xs text-muted-foreground'>
-        口令（粉丝群的名字）
+        口令（管理口令）
         <input
           class='rounded-lg border bg-background px-2.5 py-1.5 text-sm text-foreground'
           name='passcode'
@@ -534,7 +534,7 @@ const signupClosed = isSignupClosed()
           maxlength='40'
           required
           autocomplete='off'
-          placeholder='粉丝群的名字'
+          placeholder='管理口令'
         />
       </label>
 

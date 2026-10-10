@@ -324,9 +324,9 @@ describe('draft publication policy', () => {
   test('Contact metadata does not advertise discontinued services in either language', () => {
     for (const path of ['/contact', '/en/contact']) {
       const description = sectionMetadata(path)!.description
-      expect(description).toContain('QQ')
+      expect(description).toContain('GitHub')
       expect(description).not.toMatch(
-        /付费|模拟面试|简历辅导|微信|paid|consulting|mock interview|coaching|WeChat/i
+        /Joye|joyehuang|QQ|付费|模拟面试|简历辅导|微信|paid|consulting|mock interview|coaching|WeChat/i
       )
     }
   })

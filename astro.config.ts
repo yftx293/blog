@@ -35,7 +35,7 @@ const excludedSitemapPathPatterns = [
   /^\/(?:en\/)?404\/?$/,
   /^\/(?:en\/)?search\/?$/,
   /^\/api(?:\/|$)/,
-  /^\/\.well-known\/joye-manifest\.json$/
+  /^\/\.well-known\/(?:joye|site)-manifest\.json$/
 ]
 
 const siteUrl = process.env.SITE_URL ?? 'https://blog-sandy-psi-42.vercel.app'
@@ -64,6 +64,8 @@ const exposeSingleSitemap = (): AstroIntegration => ({
           ],
           sources: [
             `src/pages${path}/index.astro`,
+            'src/components/about/AboutContent.astro',
+            'src/components/about/ToolCatalog.astro',
             'src/components/about/Substats.astro',
             'src/components/about/ToolSection.astro'
           ]
@@ -116,7 +118,8 @@ export default defineConfig({
   // indexed and linked, so send them (and their link equity) to the new home.
   redirects: {
     '/archive': '/notes',
-    '/archive/0426-openharness-phase1-architecture-notes': '/blog/20260410---openharnessphase1/post',
+    '/archive/0426-openharness-phase1-architecture-notes':
+      '/blog/20260410---openharnessphase1/post',
     '/archive/[...id]': '/notes/[...id]',
     '/en/archive': '/en/notes',
     '/en/archive/[...id]': '/en/notes/[...id]'

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Learning loop — technical overview</title>
+  <desc id="desc">A repeatable path from questions to practice. Read / ask / identify constraints. Build / test / inspect failures. Record / discuss / iterate. Conceptual illustration, not an application screenshot.</desc>
+  <rect width="1200" height="760" rx="28" fill="#0c1220"/>
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace">
+    <text x="68" y="86" font-size="21" fill="#659eb9">YU / PROJECT NOTES</text>
+    <text x="68" y="163" font-size="48" font-weight="600" fill="#e6edf5">Learning loop</text>
+    <text x="68" y="210" font-size="23" fill="#91a5ba">A repeatable path from questions to practice</text>
+    <rect x="68" y="267" width="1064" height="98" rx="16" fill="#142035" stroke="#314258"/><text x="98" y="326" font-size="25" fill="#e6edf5">01 / Read / ask / identify constraints</text>
+    <rect x="68" y="392" width="1064" height="98" rx="16" fill="#142035" stroke="#314258"/><text x="98" y="451" font-size="25" fill="#e6edf5">02 / Build / test / inspect failures</text>
+    <rect x="68" y="517" width="1064" height="98" rx="16" fill="#142035" stroke="#314258"/><text x="98" y="576" font-size="25" fill="#e6edf5">03 / Record / discuss / iterate</text>
+    <text x="68" y="709" font-size="18" fill="#91a5ba">CONCEPTUAL OVERVIEW · LEARNING / SYSTEMS / PRACTICE</text>
+  </g>
+</svg>

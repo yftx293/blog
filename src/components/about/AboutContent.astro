@@ -1,0 +1,115 @@
+---
+import { Collapse } from 'astro-pure/user'
+import Substats from '@/components/about/Substats.astro'
+import ToolCatalog from '@/components/about/ToolCatalog.astro'
+import JojoAbout from '@/components/jojo/JojoAbout.astro'
+
+interface Props {
+  lang: 'zh' | 'en'
+}
+const { lang } = Astro.props
+const en = lang === 'en'
+---
+
+<h2 id='about-me'>{en ? 'About me' : '关于我'}</h2>
+<p>AI Agent &amp; Full-Stack Developer</p>
+<p>
+  {
+    en
+      ? 'I am an Information and Computing Science undergraduate.'
+      : '我是一名信息与计算科学本科生。'
+  }
+</p>
+<h2 id='current-focus'>{en ? 'Current focus' : '当前关注'}</h2>
+<p>
+  {
+    en
+      ? 'I focus on AI agents, coding agents, LLM applications, and related engineering systems, while learning backend development and AI Infra.'
+      : '当前主要关注 AI Agent、Coding Agent、LLM 应用与相关工程系统，也在学习后端与 AI Infra。'
+  }
+</p>
+<h2 id='about-blog'>{en ? 'About this blog' : '关于这个博客'}</h2>
+<p>
+  {
+    en
+      ? 'This blog records technical learning, project practice, source-code reading, and thoughts as they take shape.'
+      : '这里记录技术学习、项目实践、源码阅读，以及一些逐渐形成的思考。'
+  }
+</p>
+<p>
+  {
+    en
+      ? 'The site keeps its existing technical foundation and reusable capabilities:'
+      : '本站保留原有的技术基础与可复用能力：'
+  }
+</p>
+<ul>
+  <li>
+    Framework & Theme: <a href='https://astro.build/' target='_blank'>Astro</a> + <a
+      href='https://github.com/cworld1/astro-theme-pure'
+      target='_blank'>Astro Theme Pure</a
+    >
+  </li>
+  <li>
+    Site hosting: <a href='https://vercel.com/' target='_blank'>Vercel</a>
+  </li>
+  <li>
+    Other statistics: <a href='https://github.com/spencerwooo/substats' target='_blank'>Substats</a>
+  </li>
+  <li>
+    Comment system: <a href='https://waline.js.org/' target='_blank'>Waline</a>
+  </li>
+</ul>
+{
+  __JOJO__ && (
+    <>
+      <>
+        <h2 id='jojo'>Jojo</h2>
+        <JojoAbout {lang} />
+      </>
+    </>
+  )
+}
+<h2 id='social-networks'>GitHub</h2>
+<Substats
+  stats={[
+    {
+      platform: 'GitHub',
+      icon: 'github',
+      link: 'https://github.com/yftx293',
+      text: 'followers',
+      api: 'github/yftx293'
+    }
+  ]}
+/>
+<h2 id='tools'>{en ? 'Tools & references' : '工具与参考'}</h2>
+<p>
+  {
+    en
+      ? 'A retained catalogue of development, design, cloud, and environment references, not a list of equipment I own or tools I have mastered.'
+      : '保留开发、设计、云平台和运行环境的工具目录，作为参考；这不是我的设备清单，也不代表已经掌握全部工具。'
+  }
+</p>
+<ToolCatalog />
+<h2 id='technical-notes'>{en ? 'Technical directions' : '技术方向'}</h2>
+<Collapse title={en ? 'Agent engineering' : 'Agent 工程'}>
+  {
+    en
+      ? 'Agent loops, tools, context, memory, skills, and multi-agent coordination are useful questions for source-code reading and project practice.'
+      : 'Agent Loop、工具调用、Context、记忆、Skills 与多 Agent 协作，是源码阅读和项目实践中值得持续研究的问题。'
+  }
+</Collapse>
+<Collapse title={en ? 'LLM internals' : 'LLM 底层机制'}>
+  {
+    en
+      ? 'Transformer, pretraining, and SFT; RMSNorm, RoPE, Attention, and FeedForward remain part of the technical reference space.'
+      : 'Transformer、预训练与 SFT，以及 RMSNorm、RoPE、Attention 和 FeedForward，仍保留在技术参考范围中。'
+  }
+</Collapse>
+<Collapse title={en ? 'Engineering practice' : '工程实践'}>
+  {
+    en
+      ? 'Backend development, AI Infra, RAG, observability, and review workflows connect ideas to systems that can be inspected and improved.'
+      : '后端、AI Infra、RAG、可观测性与 review 流程，将想法连接到可检查、可迭代的工程系统。'
+  }
+</Collapse>

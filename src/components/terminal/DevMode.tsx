@@ -81,7 +81,7 @@ function Prompt({ user, host, cwd }: { user: string; host: string; cwd: string }
   )
 }
 
-export default function DevMode({ fs, user = 'joye', host = ROOT_LABEL, onExit }: Props) {
+export default function DevMode({ fs, user = 'yu', host = ROOT_LABEL, onExit }: Props) {
   const [bootLines, setBootLines] = useState<BootLine[]>([])
   const [bootDone, setBootDone] = useState(false)
   const [entries, setEntries] = useState<RenderEntry[]>([])
@@ -182,7 +182,7 @@ export default function DevMode({ fs, user = 'joye', host = ROOT_LABEL, onExit }
   // boot sequence: roughly "loading" steps, streamed in
   useEffect(() => {
     const steps: Omit<BootLine, 'ok'>[] = [
-      { t: 0, text: 'booting joye-shell v0.1 …' },
+      { t: 0, text: 'booting yu-shell v0.1 …' },
       { t: 180, text: 'loading /etc/personality.conf' },
       { t: 420, text: `mounting /blog (${blogCount} entries)` },
       { t: 710, text: 'spinning up agent mock on localhost:∞' },
@@ -445,9 +445,9 @@ export default function DevMode({ fs, user = 'joye', host = ROOT_LABEL, onExit }
                 {blogCount} indexed <span className='val-muted'>· `ls /blog`</span>
               </span>
               <span className='key'>uptime</span>
-              <span className='val'>since Apr 2024</span>
+              <span className='val'>this session</span>
               <span className='key'>locale</span>
-              <span className='val'>Melbourne, AU</span>
+              <span className='val'>Developer workspace</span>
             </div>
           </div>
         )}
