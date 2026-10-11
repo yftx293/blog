@@ -13,7 +13,7 @@ export const theme: ThemeUserConfig = {
   description: 'Learning, building, and thinking in public',
 
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
-  favicon: '/favicon/favicon.ico',
+  favicon: '/favicon/yu-github-20261011.ico',
 
   /** Specify the default language for this site. */
   locale: {
