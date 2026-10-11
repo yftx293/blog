@@ -20,9 +20,9 @@ const sections: Record<string, [string, string, string, string]> = {
   ],
   '/projects': [
     '项目',
-    'Yu 的 Coding Agent、Agentic RAG 与 AI PR Review 项目，以及 Agent 工程、LLM 和开发工具的参考资料。',
+    'Yu 的 AiNativeCrm、miniclaw 与 folio 项目，以及 Agent 工程、LLM 和开发工具的参考资料。',
     'Projects',
-    'Yu’s coding agent, Agentic RAG, and AI PR review projects, alongside references on agent engineering, LLMs, and developer tools.'
+    'Yu’s AiNativeCrm, miniclaw, and folio projects, alongside references on agent engineering, LLMs, and developer tools.'
   ],
   '/links': [
     '链接',

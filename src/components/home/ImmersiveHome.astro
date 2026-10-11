@@ -61,9 +61,9 @@ const copy = isEn
       intro: 'Exploring AI agents, coding agents, LLM applications, and engineering systems.',
       location: 'Information and Computing Science undergraduate',
       explore: 'Enter the work',
-      selected: 'From coding agents to RAG and review workflows.',
+      selected: 'From CRM workflows to agent workspaces and research.',
       selectedBody:
-        'Three projects exploring CLI workflows, knowledge-backed services, and inspectable AI review.',
+        'Three projects exploring controlled business actions, long-running agent workspaces, and evidence-backed research.',
       visit: 'Visit repository',
       livePreview: 'Project overview',
       staticPreview: 'Back to overview',
@@ -77,9 +77,9 @@ const copy = isEn
         'Long-form essays and compact research notes from the things I am building and learning.',
       essays: 'Essays',
       notes: 'Notes',
-      openSource: 'Open-source projects',
+      openSource: 'Projects',
       sourceBody:
-        'Coding agents, Agentic RAG, and AI PR review: a record of technical exploration.',
+        'AiNativeCrm, miniclaw, and folio: a record of agent engineering in real workflows.',
       finale: 'Let’s put AI into a real product.',
       finaleBody:
         'Find me on GitHub to discuss AI agents, coding agents, LLM applications, engineering practice, or something from this blog.',
@@ -103,8 +103,9 @@ const copy = isEn
       intro: '学习和构建 AI Agent、Coding Agent 与 LLM 应用，记录项目中的工程问题。',
       location: '信息与计算科学本科生',
       explore: '进入作品',
-      selected: '从 Coding Agent 到 RAG 与 Review 流程。',
-      selectedBody: '三个真实项目，探索 CLI 工作流、知识驱动的服务，以及可查看的 AI Review 流程。',
+      selected: '从 CRM 工作流到 Agent 工作区与研究。',
+      selectedBody:
+        '三个真实项目，探索受控业务动作、长期运行的 Agent 工作区，以及基于证据的研究流程。',
       visit: '访问仓库',
       livePreview: '项目概览',
       staticPreview: '返回概览',
@@ -116,8 +117,8 @@ const copy = isEn
       journalBody: '长文章记录完整思考，Notes 留下正在研究和实践中的小结。',
       essays: '文章',
       notes: '笔记',
-      openSource: '开源项目',
-      sourceBody: 'Coding Agent、Agentic RAG 与 AI PR Review：留下技术探索和工程取舍。',
+      openSource: '项目',
+      sourceBody: 'AiNativeCrm、miniclaw 与 folio：留下真实工作流中的 Agent 工程实践。',
       finale: '一起把 AI 做进真实产品。',
       finaleBody: '欢迎通过 GitHub 交流 AI Agent、Coding Agent、LLM 应用、工程实践或博客内容。',
       context: '团队',
@@ -137,18 +138,18 @@ const projects: ProductItem[] = isEn
       {
         index: '01',
         key: 'playyy',
-        title: 'tinycode',
-        role: 'TypeScript Coding Agent',
-        body: 'Built on Pi Agent Core to explore CLI, permissions, sessions, context, skills, MCP, and read-only sub-agents.',
+        title: 'AiNativeCrm',
+        role: 'Agent-native CRM',
+        body: 'Uses CRM as an agent environment to explore controlled tool execution, knowledge, memory, and replayable, evaluable business workflows.',
         metrics: [
-          ['Pi', 'Agent Core'],
-          ['CLI', 'Permissions / Sessions'],
-          ['MCP', 'Skills / Context']
+          ['CRM', 'Business context'],
+          ['Tools', 'Harness / Approvals'],
+          ['Eval', 'Trace / Replay']
         ],
-        href: 'https://github.com/yftx293/tinycode',
-        image: '/images/projects/tinycode.svg',
-        imageLight: '/images/projects/tinycode-light.svg',
-        alt: 'A lightweight TypeScript coding agent — technical overview',
+        href: 'https://github.com/yftx293/AiNativeCrm',
+        image: '/images/projects/AiNativeCrm.svg',
+        imageLight: '/images/projects/AiNativeCrm-light.svg',
+        alt: 'Agent-native CRM — technical overview',
         domain: 'github.com/yftx293',
         accent: '#659eb9',
         embeddable: true
@@ -156,18 +157,18 @@ const projects: ProductItem[] = isEn
       {
         index: '02',
         key: 'atypica',
-        title: 'enterprise-customer-service-agentic-rag',
-        role: 'Agentic RAG',
-        body: 'Explores how RAG, conversations, tickets, knowledge bases, and trace / observability form a traceable engineering workflow.',
+        title: 'miniclaw',
+        role: 'Self-hosted Agent Workbench',
+        body: 'Built on Pi Agent Runtime to explore workspaces, persistent sessions, memory, multi-channel access, and background tasks.',
         metrics: [
-          ['RAG', 'Knowledge / Dialogue'],
-          ['Trace', 'Observability'],
-          ['Flow', 'Tickets']
+          ['Pi', 'Agent Runtime'],
+          ['State', 'Workspace / Memory'],
+          ['Tasks', 'Channels / Scheduler']
         ],
-        href: 'https://github.com/yftx293/enterprise-customer-service-agentic-rag',
-        image: '/images/projects/enterprise-customer-service-agentic-rag.svg',
-        imageLight: '/images/projects/enterprise-customer-service-agentic-rag-light.svg',
-        alt: 'Enterprise customer-service Agentic RAG — technical overview',
+        href: 'https://github.com/yftx293/miniclaw',
+        image: '/images/projects/miniclaw.svg',
+        imageLight: '/images/projects/miniclaw-light.svg',
+        alt: 'Self-hosted agent workbench — technical overview',
         domain: 'github.com/yftx293',
         accent: '#69c978',
         embeddable: false
@@ -175,18 +176,18 @@ const projects: ProductItem[] = isEn
       {
         index: '03',
         key: 'aixcut',
-        title: 'qiniu-xengineer-ai-pr-review',
-        role: 'AI PR Review',
-        body: 'Explores the workflow from GitHub PR retrieval and diff risk analysis to AI review and presentation.',
+        title: 'folio',
+        role: 'Local-first AI Research',
+        body: 'Connects market data, agents, and evidence to research reports and thesis changes, with evaluation and no trading functionality.',
         metrics: [
-          ['PR', 'GitHub retrieval'],
-          ['Diff', 'Risk analysis'],
-          ['AI', 'Review / Presentation']
+          ['Local', 'Research workspace'],
+          ['Data', 'Evidence / Reports'],
+          ['Eval', 'Thesis / Research Diff']
         ],
-        href: 'https://github.com/yftx293/qiniu-xengineer-ai-pr-review',
-        image: '/images/projects/qiniu-xengineer-ai-pr-review.svg',
-        imageLight: '/images/projects/qiniu-xengineer-ai-pr-review-light.svg',
-        alt: 'AI PR review — technical overview',
+        href: 'https://github.com/yftx293/folio',
+        image: '/images/projects/folio.svg',
+        imageLight: '/images/projects/folio-light.svg',
+        alt: 'Local-first AI research workbench — technical overview',
         domain: 'github.com/yftx293',
         accent: '#50d8b1',
         embeddable: false
@@ -196,18 +197,18 @@ const projects: ProductItem[] = isEn
       {
         index: '01',
         key: 'playyy',
-        title: 'tinycode',
-        role: 'TypeScript Coding Agent',
-        body: '基于 Pi Agent Core，探索 CLI、权限、会话、Context、Skills、MCP 与只读子 Agent。',
+        title: 'AiNativeCrm',
+        role: 'Agent-native CRM',
+        body: '以 CRM 为 Agent 的工作环境，探索受控工具执行、知识与记忆，以及可回放、可评测的业务流程。',
         metrics: [
-          ['Pi', 'Agent Core'],
-          ['CLI', 'Permissions / Sessions'],
-          ['MCP', 'Skills / Context']
+          ['CRM', 'Business context'],
+          ['Tools', 'Harness / Approvals'],
+          ['Eval', 'Trace / Replay']
         ],
-        href: 'https://github.com/yftx293/tinycode',
-        image: '/images/projects/tinycode.svg',
-        imageLight: '/images/projects/tinycode-light.svg',
-        alt: 'A lightweight TypeScript coding agent — technical overview',
+        href: 'https://github.com/yftx293/AiNativeCrm',
+        image: '/images/projects/AiNativeCrm.svg',
+        imageLight: '/images/projects/AiNativeCrm-light.svg',
+        alt: 'Agent-native CRM — technical overview',
         domain: 'github.com/yftx293',
         accent: '#659eb9',
         embeddable: true
@@ -215,18 +216,18 @@ const projects: ProductItem[] = isEn
       {
         index: '02',
         key: 'atypica',
-        title: 'enterprise-customer-service-agentic-rag',
-        role: 'Agentic RAG',
-        body: '探索 RAG、对话、工单、知识库以及 trace / observability 如何组成可追踪的工程流程。',
+        title: 'miniclaw',
+        role: 'Self-hosted Agent Workbench',
+        body: '基于 Pi Agent Runtime，探索工作区、持久会话、记忆、多渠道接入与后台任务的执行边界。',
         metrics: [
-          ['RAG', 'Knowledge / Dialogue'],
-          ['Trace', 'Observability'],
-          ['Flow', 'Tickets']
+          ['Pi', 'Agent Runtime'],
+          ['State', 'Workspace / Memory'],
+          ['Tasks', 'Channels / Scheduler']
         ],
-        href: 'https://github.com/yftx293/enterprise-customer-service-agentic-rag',
-        image: '/images/projects/enterprise-customer-service-agentic-rag.svg',
-        imageLight: '/images/projects/enterprise-customer-service-agentic-rag-light.svg',
-        alt: 'Enterprise customer-service Agentic RAG — technical overview',
+        href: 'https://github.com/yftx293/miniclaw',
+        image: '/images/projects/miniclaw.svg',
+        imageLight: '/images/projects/miniclaw-light.svg',
+        alt: 'Self-hosted agent workbench — technical overview',
         domain: 'github.com/yftx293',
         accent: '#69c978',
         embeddable: false
@@ -234,18 +235,18 @@ const projects: ProductItem[] = isEn
       {
         index: '03',
         key: 'aixcut',
-        title: 'qiniu-xengineer-ai-pr-review',
-        role: 'AI PR Review',
-        body: '探索 GitHub PR 获取、diff 风险分析、AI review 与展示流程如何衔接。',
+        title: 'folio',
+        role: 'Local-first AI Research',
+        body: '将行情、Agent 与证据关联到研究报告和论点变化，探索评测与持续研究；不提供交易能力。',
         metrics: [
-          ['PR', 'GitHub retrieval'],
-          ['Diff', 'Risk analysis'],
-          ['AI', 'Review / Presentation']
+          ['Local', 'Research workspace'],
+          ['Data', 'Evidence / Reports'],
+          ['Eval', 'Thesis / Research Diff']
         ],
-        href: 'https://github.com/yftx293/qiniu-xengineer-ai-pr-review',
-        image: '/images/projects/qiniu-xengineer-ai-pr-review.svg',
-        imageLight: '/images/projects/qiniu-xengineer-ai-pr-review-light.svg',
-        alt: 'AI PR review — technical overview',
+        href: 'https://github.com/yftx293/folio',
+        image: '/images/projects/folio.svg',
+        imageLight: '/images/projects/folio-light.svg',
+        alt: 'Local-first AI research workbench — technical overview',
         domain: 'github.com/yftx293',
         accent: '#50d8b1',
         embeddable: false
@@ -385,47 +386,47 @@ const totalStars = repos.every((repo) => repo.stars !== null)
           <figure class='hero-screen hero-screen--playyy'>
             <img
               class='theme-image theme-image--light'
-              src='/images/projects/tinycode-light.svg'
-              alt='tinycode technical overview'
+              src='/images/projects/AiNativeCrm-light.svg'
+              alt='AiNativeCrm technical overview'
               loading='eager'
             />
             <img
               class='theme-image theme-image--dark'
-              src='/images/projects/tinycode.svg'
-              alt='tinycode technical overview'
+              src='/images/projects/AiNativeCrm.svg'
+              alt='AiNativeCrm technical overview'
               loading='eager'
             />
-            <figcaption>01 / TINYCODE</figcaption>
+            <figcaption>01 / AINATIVECRM</figcaption>
           </figure>
           <figure class='hero-screen hero-screen--atypica'>
             <img
               class='theme-image theme-image--light'
-              src='/images/projects/enterprise-customer-service-agentic-rag-light.svg'
-              alt='Agentic RAG technical overview'
+              src='/images/projects/miniclaw-light.svg'
+              alt='miniclaw technical overview'
               loading='eager'
             />
             <img
               class='theme-image theme-image--dark'
-              src='/images/projects/enterprise-customer-service-agentic-rag.svg'
-              alt='Agentic RAG technical overview'
+              src='/images/projects/miniclaw.svg'
+              alt='miniclaw technical overview'
               loading='eager'
             />
-            <figcaption>02 / AGENTIC RAG</figcaption>
+            <figcaption>02 / MINICLAW</figcaption>
           </figure>
           <figure class='hero-screen hero-screen--aixcut'>
             <img
               class='theme-image theme-image--light'
-              src='/images/projects/qiniu-xengineer-ai-pr-review-light.svg'
-              alt='AI PR Review technical overview'
+              src='/images/projects/folio-light.svg'
+              alt='folio technical overview'
               loading='eager'
             />
             <img
               class='theme-image theme-image--dark'
-              src='/images/projects/qiniu-xengineer-ai-pr-review.svg'
-              alt='AI PR Review technical overview'
+              src='/images/projects/folio.svg'
+              alt='folio technical overview'
               loading='eager'
             />
-            <figcaption>03 / AI PR REVIEW</figcaption>
+            <figcaption>03 / FOLIO</figcaption>
           </figure>
         </div>
       </div>

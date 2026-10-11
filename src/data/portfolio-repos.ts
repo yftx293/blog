@@ -2,46 +2,48 @@ export type PortfolioLocale = 'zh' | 'en'
 
 const repositories = [
   {
-    name: 'tinycode',
-    fullName: 'yftx293/tinycode',
-    href: 'https://github.com/yftx293/tinycode',
+    name: 'AiNativeCrm',
+    fullName: 'yftx293/AiNativeCrm',
+    href: 'https://github.com/yftx293/AiNativeCrm',
     zh: {
-      eyebrow: '轻量级 TypeScript Coding Agent',
-      description: '基于 Pi Agent Core，探索 CLI、权限、会话、Context、Skills、MCP 与只读子 Agent。'
+      eyebrow: 'Agent 原生 CRM 工作台',
+      description:
+        '以 CRM 为 Agent 的工作环境，探索受控工具执行、知识与记忆，以及可回放、可评测的业务流程。'
     },
     en: {
-      eyebrow: 'A lightweight TypeScript coding agent',
+      eyebrow: 'An agent-native CRM workbench',
       description:
-        'Built on Pi Agent Core to explore CLI, permissions, sessions, context, skills, MCP, and read-only sub-agents.'
+        'Uses CRM as an agent environment to explore controlled tool execution, knowledge, memory, and replayable, evaluable business workflows.'
     }
   },
   {
-    name: 'enterprise-customer-service-agentic-rag',
-    fullName: 'yftx293/enterprise-customer-service-agentic-rag',
-    href: 'https://github.com/yftx293/enterprise-customer-service-agentic-rag',
+    name: 'miniclaw',
+    fullName: 'yftx293/miniclaw',
+    href: 'https://github.com/yftx293/miniclaw',
     zh: {
-      eyebrow: '企业客服 Agentic RAG',
+      eyebrow: '自托管多渠道 Agent 工作台',
       description:
-        '探索 RAG、对话、工单、知识库以及 trace / observability 如何组成可追踪的工程流程。'
+        '基于 Pi Agent Runtime，探索工作区、持久会话、记忆与能力边界如何支撑多渠道接入和后台任务。'
     },
     en: {
-      eyebrow: 'Enterprise customer-service Agentic RAG',
+      eyebrow: 'A self-hosted, multi-channel agent workbench',
       description:
-        'Explores how RAG, conversations, tickets, knowledge bases, and trace / observability form a traceable engineering workflow.'
+        'Built on Pi Agent Runtime to explore how workspaces, persistent sessions, memory, and capability boundaries support channels and background tasks.'
     }
   },
   {
-    name: 'qiniu-xengineer-ai-pr-review',
-    fullName: 'yftx293/qiniu-xengineer-ai-pr-review',
-    href: 'https://github.com/yftx293/qiniu-xengineer-ai-pr-review',
+    name: 'folio',
+    fullName: 'yftx293/folio',
+    href: 'https://github.com/yftx293/folio',
     zh: {
-      eyebrow: 'AI PR Review',
-      description: '探索 GitHub PR 获取、diff 风险分析、AI review 与展示流程如何衔接。'
+      eyebrow: '本地优先的 AI 投资研究工作台',
+      description:
+        '将行情、Agent 与证据关联起来，探索研究报告、论点变化和评测如何组成持续研究流程；不提供交易能力。'
     },
     en: {
-      eyebrow: 'AI PR review',
+      eyebrow: 'A local-first AI investment research workbench',
       description:
-        'Explores the workflow from GitHub PR retrieval and diff risk analysis to AI review and presentation.'
+        'Connects market data, agents, and evidence to explore research reports, thesis changes, and evaluation in a continuing research workflow; no trading functionality.'
     }
   }
 ]
