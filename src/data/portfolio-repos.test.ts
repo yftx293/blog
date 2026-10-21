@@ -70,7 +70,7 @@ describe('personal portfolio', () => {
   })
 
   test('localized project pages and alternate showcases use the current projects', () => {
-    const names = ['AiNativeCrm', 'miniclaw', 'folio']
+    const names = ['AiNativeCrm', 'NibelClaw', 'folio']
     const files = [
       '../pages/projects/index.astro',
       '../pages/en/projects/index.astro',
@@ -83,7 +83,14 @@ describe('personal portfolio', () => {
       expect(source).not.toMatch(
         /tinycode|enterprise-customer-service-agentic-rag|qiniu-xengineer-ai-pr-review/
       )
-      for (const name of names) expect(source).toContain(name)
+      const isProjectsPage = file.includes('/pages/')
+      const expectedNames = isProjectsPage ? names : ['AiNativeCrm', 'miniclaw', 'folio']
+      for (const name of expectedNames) expect(source).toContain(name)
+      if (isProjectsPage) {
+        expect(source).toContain("id: 'nibelclaw'")
+        expect(source).toContain('https://github.com/yftx293/NibelClaw')
+        expect(source).not.toContain('miniclaw')
+      }
     }
     for (const path of ['/projects', '/en/projects']) {
       for (const name of names) expect(sectionMetadata(path)?.description).toContain(name)
