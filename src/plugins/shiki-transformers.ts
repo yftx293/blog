@@ -25,6 +25,8 @@ export const updateStyle = (): ShikiTransformer => {
     name: 'shiki-transformer-update-style',
     pre(node) {
       const container = h('pre', node.children)
+      container.properties.tabIndex = 0
+      container.properties['aria-label'] = 'Code'
       node.children = [container]
       node.tagName = 'div'
     }
@@ -101,11 +103,39 @@ export const addCopyButton = (timeout?: number): ShikiTransformer => {
         'button',
         {
           class: 'copy text-muted-foreground p-1 box-content border rounded bg-primary-foreground',
+          type: 'button',
+          'aria-label': 'Copy code',
+          title: 'Copy code',
           'data-code': this.source,
-          onclick: `
-          navigator.clipboard.writeText(this.dataset.code);
-          this.classList.add('copied');
-          setTimeout(() => this.classList.remove('copied'), ${toggleMs})
+          onclick: `return (async () => {
+          if (this.disabled) return;
+          const attempt = String((Number(this.dataset.copyAttempt) || 0) + 1);
+          this.dataset.copyAttempt = attempt;
+          const zh = document.documentElement.lang.startsWith('zh');
+          const ready = zh ? '复制代码' : 'Copy code';
+          this.disabled = true;
+          this.dataset.copyState = 'pending';
+          try {
+            await navigator.clipboard.writeText(this.dataset.code);
+            this.classList.add('copied');
+            this.dataset.copyState = 'success';
+            this.setAttribute('aria-label', zh ? '已复制' : 'Copied');
+            this.setAttribute('title', zh ? '已复制' : 'Copied');
+          } catch {
+            this.dataset.copyState = 'error';
+            this.disabled = false;
+            this.setAttribute('aria-label', zh ? '复制失败，请手动选择代码' : 'Copy failed. Select the code manually.');
+            this.setAttribute('title', zh ? '复制失败，请手动选择代码' : 'Copy failed. Select the code manually.');
+          }
+          setTimeout(() => {
+            if (this.dataset.copyAttempt !== attempt) return;
+            this.classList.remove('copied');
+            this.dataset.copyState = 'ready';
+            this.disabled = false;
+            this.setAttribute('aria-label', ready);
+            this.setAttribute('title', ready);
+          }, ${toggleMs});
+        })();
         `
         },
         [

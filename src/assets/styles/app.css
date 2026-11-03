@@ -71,9 +71,62 @@ html {
 }
 :root {
   --un-default-border-color: hsl(var(--border) / 1);
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: hsl(var(--muted-foreground) / 0.35);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 html.dark {
   color-scheme: dark;
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: hsl(var(--muted-foreground) / 0.35);
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.22);
+  color: hsl(var(--foreground));
+}
+
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 4px;
+}
+
+/* Keep the existing home composition; add a quieter, more deliberate vertical rhythm. */
+.home-page #content {
+  row-gap: 3.5rem;
+}
+
+.home-page #content-header h1 {
+  letter-spacing: -0.025em;
+}
+
+.home-page .post-preview {
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.home-page .post-preview:focus-within {
+  border-color: hsl(var(--primary) / 0.6);
+}
+
+header-component a[aria-current='page'] {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.5em;
+}
+
+@media (max-width: 640px) {
+  .home-page #content {
+    row-gap: 2.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .post-preview {
+    transition: none;
+  }
 }
 
 /* Global */

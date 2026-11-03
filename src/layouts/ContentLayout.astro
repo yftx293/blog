@@ -6,6 +6,8 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import BackToTop from '@/components/navigation/BackToTop.astro'
 import { integ } from '@/site-config'
 
+import '@/assets/styles/reading.css'
+
 interface Props {
   meta: SiteMeta & { noindex?: boolean }
   highlightColor?: string
@@ -17,7 +19,7 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
 
 <PageLayout {meta} {highlightColor} {...props}>
   <Button title='Back' href={back} style='back' />
-  <main class='mt-6 items-start gap-x-10 md:flex'>
+  <main class='reading-layout mt-6 items-start gap-x-10 md:flex'>
     {/* Sidebar */}
     <aside
       class='animate top-20 min-w-48 basis-60 overflow-y-scroll max-md:hidden z-40 fixed md:sticky md:order-2 lg:shrink-0 max-md:border max-md:px-4 max-md:py-3 max-md:bg-muted max-md:rounded-xl'
@@ -42,10 +44,7 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
       {/* Content */}
       <div
         id='content'
-        class={cn(
-          'max-w-none animate mt-8 md:min-w-[45ch] overflow-x-hidden',
-          integ.typography.class
-        )}
+        class={cn('reading-content max-w-none animate mt-8', integ.typography.class)}
       >
         <slot />
       </div>
@@ -127,7 +126,7 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
   })
 
   window.addEventListener('resize', () => {
-    if (window.matchMedia('(min-width: 769px)').matches) {
+    if (window.matchMedia('(min-width: 768px)').matches) {
       sidebar?.classList.remove('show')
       if (sidebarShade) sidebarShade.style.display = 'none'
       sidebarButton?.setAttribute('aria-expanded', 'false')
@@ -135,15 +134,16 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
   })
 </script>
 <style>
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     #sidebar-shade {
       display: none !important;
     }
   }
-  @media (max-width: 769px) {
+  @media (max-width: 767px) {
     aside.show {
       display: block !important;
       opacity: 1;
+      animation: none !important;
     }
 
     @keyframes fade-in-side {

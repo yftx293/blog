@@ -75,6 +75,14 @@ typography:
     fontWeight: 400
     lineHeight: 20px
     letterSpacing: -0.025em
+  project-title:
+    fontFamily: Satoshi
+    fontSize: 18px
+    fontWeight: 500
+  project-description:
+    fontFamily: Satoshi
+    fontSize: 14.4px
+    lineHeight: 1.8
 rounded:
   md: 6px
   lg: 8px
@@ -170,6 +178,20 @@ skeuomorphism, not theme content, so it's pinned regardless of light/dark.
   cover nearly everything observed).
 
 ## Layout
+
+### Reading and interaction refinement (2026-11-03)
+
+`src/assets/styles/reading.css` refines the shared ContentLayout without changing
+content or the terminal/Jojo sub-themes. Reading columns cap at 46rem; Chinese
+body copy uses 1.95 leading (1.9 on phones). Titles scale from 28 to 37.6px,
+section headings use 600 weight, and `not-prose` components retain their own
+typography. Code keeps the existing Shiki themes, filename metadata, line
+numbers and notation transformers, with a 44px copy control, an explicit
+toolbar, horizontal scrolling, and success feedback only after clipboard
+confirmation. Clipboard failure is indicated on the control and never reported
+as success. Home/project cards keep their structure and palette; shared focus
+rings, current-navigation marks and restrained hover transitions improve feedback.
+Reduced-motion disables new transitions and smooth TOC jumps.
 
 No custom spacing scale — default 0.25rem-increment scale from
 `presetMini`. Two idioms recur enough to be conventions:

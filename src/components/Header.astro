@@ -1,5 +1,11 @@
 ---
-import { getLangFromUrl, hasEnAlternate, localizedPath, useTranslations, type Lang } from '@/i18n/ui'
+import {
+  getLangFromUrl,
+  hasEnAlternate,
+  localizedPath,
+  useTranslations,
+  type Lang
+} from '@/i18n/ui'
 
 import { Icon } from 'astro-pure/user'
 import LanguageSwitcher from '@/components/LanguageSwitcher.astro'
@@ -35,6 +41,7 @@ const menu = (config.header?.menu ?? [])
 
 const homeHref = localizedPath('/', lang)
 const searchHref = localizedPath('/search', lang)
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 <header-component
@@ -59,7 +66,12 @@ const searchHref = localizedPath('/search', lang)
             <a
               href={item.link}
               class='w-full flex-none grow py-2 text-right font-medium transition-none hover:text-primary sm:w-fit sm:px-3'
-              aria-label='Nav menu item'
+              aria-label={item.title}
+              aria-current={
+                currentPath === item.link || currentPath.startsWith(`${item.link}/`)
+                  ? 'page'
+                  : undefined
+              }
             >
               {item.title}
             </a>
@@ -115,8 +127,9 @@ const searchHref = localizedPath('/search', lang)
   }
 </script>
 <script>
-  import { setTheme, showToast } from 'astro-pure/utils'
   import { trackSiteEvent } from '@/lib/analytics'
+
+  import { setTheme, showToast } from 'astro-pure/utils'
 
   class Header extends HTMLElement {
     private toggleMenuBtn: HTMLElement | null = null
