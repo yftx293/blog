@@ -71,10 +71,6 @@ export const theme: ThemeUserConfig = {
         link: '/notes'
       },
       {
-        title: 'Talks',
-        link: '/talks'
-      },
-      {
         title: 'Projects',
         link: '/projects'
       },
