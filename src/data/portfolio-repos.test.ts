@@ -20,10 +20,14 @@ describe('personal portfolio', () => {
     const en = await getPortfolioRepos('en')
     expect(zh.map((repo) => repo.fullName)).toEqual([
       'yftx293/AiNativeCrm',
-      'yftx293/miniclaw',
+      'yftx293/NibelClaw',
       'yftx293/folio'
     ])
     expect(en.map((repo) => repo.fullName)).toEqual(zh.map((repo) => repo.fullName))
+    for (const repos of [zh, en]) {
+      expect(repos[1].name).toBe('NibelClaw')
+      expect(repos[1].href).toBe('https://github.com/yftx293/NibelClaw')
+    }
     expect(zh.every((repo) => repo.stars === 0)).toBe(true)
     expect(zh[0].description).toContain('CRM')
     expect(en[0].description).toContain('CRM')
@@ -59,13 +63,13 @@ describe('personal portfolio', () => {
 
   test('a private repository remains listed without an invented star count', async () => {
     setFetch(async (url) =>
-      url.endsWith('/miniclaw')
+      url.endsWith('/NibelClaw')
         ? new Response(null, { status: 404 })
         : Response.json({ stargazers_count: 0 })
     )
     const repos = await getPortfolioRepos('zh')
-    expect(repos[1].fullName).toBe('yftx293/miniclaw')
-    expect(repos[1].href).toBe('https://github.com/yftx293/miniclaw')
+    expect(repos[1].fullName).toBe('yftx293/NibelClaw')
+    expect(repos[1].href).toBe('https://github.com/yftx293/NibelClaw')
     expect(repos.map((repo) => repo.stars)).toEqual([0, null, 0])
   })
 
@@ -84,8 +88,8 @@ describe('personal portfolio', () => {
         /tinycode|enterprise-customer-service-agentic-rag|qiniu-xengineer-ai-pr-review/
       )
       const isProjectsPage = file.includes('/pages/')
-      const expectedNames = isProjectsPage ? names : ['AiNativeCrm', 'miniclaw', 'folio']
-      for (const name of expectedNames) expect(source).toContain(name)
+      for (const name of names) expect(source.toLowerCase()).toContain(name.toLowerCase())
+      expect(source).not.toContain('https://github.com/yftx293/miniclaw')
       if (isProjectsPage) {
         expect(source).toContain("id: 'nibelclaw'")
         expect(source).toContain('https://github.com/yftx293/NibelClaw')
@@ -98,10 +102,14 @@ describe('personal portfolio', () => {
   })
 
   test('each project has matching dark and light overview assets', () => {
-    for (const name of ['AiNativeCrm', 'miniclaw', 'folio']) {
+    for (const [file, name] of [
+      ['AiNativeCrm', 'AiNativeCrm'],
+      ['miniclaw', 'NibelClaw'],
+      ['folio', 'folio']
+    ]) {
       for (const variant of ['', '-light']) {
         const svg = readFileSync(
-          new URL(`../../public/images/projects/${name}${variant}.svg`, import.meta.url),
+          new URL(`../../public/images/projects/${file}${variant}.svg`, import.meta.url),
           'utf8'
         )
         expect(svg).toContain(`<title id="title">${name} — technical overview</title>`)

@@ -55,7 +55,7 @@ const copy = isEn
       readoutArtifact: 'artifact · query result',
       stats: [
         ['engineering directions', 'Agent-native CRM · Agent Workspaces · AI Research'],
-        ['selected projects', 'AiNativeCrm · miniclaw · folio'],
+        ['selected projects', 'AiNativeCrm · NibelClaw · folio'],
         ['GitHub stars', 'live count; unavailable counts remain unknown'],
         ['published essays', 'technical learning and source-code reading'],
         ['recorded technical talks', 'a space for engineering discussions']
@@ -96,7 +96,7 @@ const copy = isEn
       readoutArtifact: 'artifact · query result',
       stats: [
         ['个工程方向', 'Agent-native CRM · Agent Workspaces · AI Research'],
-        ['个展示项目', 'AiNativeCrm · miniclaw · folio'],
+        ['个展示项目', 'AiNativeCrm · NibelClaw · folio'],
         ['GitHub Stars', '实时获取；不可用时保持未知'],
         ['篇已发布文章', '技术学习与源码阅读'],
         ['期技术分享记录', '保留工程讨论的空间']
@@ -152,7 +152,7 @@ const products: Product[] = repos.map((repo, index) => ({
   description: repo.description,
   href: repo.href ?? `https://github.com/${repo.fullName}`,
   domain: 'github.com/yftx293',
-  image: `/images/projects/${repo.name}.svg`,
+  image: `/images/projects/${repo.name === 'NibelClaw' ? 'miniclaw' : repo.name}.svg`,
   alt: `${repo.name} — technical overview`
 }))
 

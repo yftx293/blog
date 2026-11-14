@@ -17,9 +17,9 @@ const repositories = [
     }
   },
   {
-    name: 'miniclaw',
-    fullName: 'yftx293/miniclaw',
-    href: 'https://github.com/yftx293/miniclaw',
+    name: 'NibelClaw',
+    fullName: 'yftx293/NibelClaw',
+    href: 'https://github.com/yftx293/NibelClaw',
     zh: {
       eyebrow: '自托管多渠道 Agent 工作台',
       description:
